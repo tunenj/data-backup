@@ -94,12 +94,12 @@ export default function Navbar() {
 
             {signInOpen && (
               <div className="absolute right-0 mt-2 w-[12rem] bg-white border-1 px-2 border-[#6F0C15] rounded-lg shadow-lg z-50">
-                <Link href="/AdminLogin" onClick={() => setSignInOpen(false)}>
+                <Link href="/login/AdminLogin" onClick={() => setSignInOpen(false)}>
                   <div className="px-4 py-2 text-[#6F0C15] cursor-pointer hover:bg-[#6F0C15] hover:text-white hover:border-2 hover:rounded-lg hover:mt-2">
                     Admin Sign in
                   </div>
                 </Link>
-                <Link href="/AgentLogin" onClick={() => setSignInOpen(false)}>
+                <Link href="/login/AgentLogin" onClick={() => setSignInOpen(false)}>
                   <div className="px-4 py-2  text-[#6F0C15] cursor-pointer hover:bg-[#6F0C15] hover:text-white hover:rounded-lg hover:mb-2">
                     Agent Sign in
                   </div>

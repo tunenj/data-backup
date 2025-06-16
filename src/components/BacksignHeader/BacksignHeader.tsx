@@ -47,16 +47,16 @@ export default function BackSign({
                     {open && (
                         <div className="absolute right-0 mt-2 w-48 bg-white border shadow-lg rounded-md z-50 p-2">
                             <Link
-                                href="/AgentLogin"
-                                className="block px-4 py-2 font-bold text-[#6F0C15] hover:bg-[#6F0C15] hover:text-white rounded-md"
-                            >
-                                Agent Login
-                            </Link>
-                            <Link
-                                href="/AdminLogin"
-                                className="block px-4 py-2 font-bold text-[#6F0C15] hover:bg-[#6F0C15] hover:text-white rounded-md"
+                                href="/login/AdminLogin"
+                                className="block px-4 py-2 font-bold text-[#6F0C15] hover:bg-[#6F0C15] hover:text-white"
                             >
                                 Admin Login
+                            </Link>
+                            <Link
+                                href="/login/AgentLogin"
+                                className="block px-4 py-2 font-bold text-[#6F0C15] hover:bg-[#6F0C15] hover:text-white"
+                            >
+                                Agent Login
                             </Link>
                         </div>
                     )}

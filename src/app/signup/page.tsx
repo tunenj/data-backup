@@ -1,23 +1,25 @@
-"use client";
+'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
-import { colors } from '@/utils/colors';
 import { Eye, EyeOff } from "lucide-react";
 import BackSign from '@/components/BacksignHeader/BacksignHeader';
 
-
-
 export default function SignupPage() {
+  // Hooks and state management
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  // Form state
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
     phone: '',
     password: '',
+    password2: '',
     companyName: '',
     jobTitle: '',
     sector: '',
@@ -26,271 +28,256 @@ export default function SignupPage() {
     agreeToTerms: false
   });
 
+  // Derived state
   const password = formData.password;
-
-  const requirements = [
+  const requirements = useMemo(() => [
     { label: "Must be at least 8 characters", valid: password.length >= 8 },
     { label: "At least one Uppercase letter (A-Z)", valid: /[A-Z]/.test(password) },
     { label: "At least one number", valid: /\d/.test(password) },
     { label: "At least one special character (!@#$%^&*)", valid: /[!@#$%^&*]/.test(password) },
-  ];
+  ], [password]);
 
-
+  // Event handlers
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value, type } = e.target as HTMLInputElement;
-    const checked = type === 'checkbox' ? (e.target as HTMLInputElement).checked : undefined;
+    const { name, value, type } = e.target;
+    const isCheckbox = type === 'checkbox';
 
     setFormData(prev => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: isCheckbox ? (e.target as HTMLInputElement).checked : value,
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    // Validation
     const passwordValid = requirements.every(r => r.valid);
-
     if (!passwordValid) {
       alert("Password does not meet all requirements.");
       return;
     }
 
-    console.log(formData);
-    router.push('/auth/otp-verification');
+    if (formData.password !== formData.password2) {
+      alert("Passwords do not match.");
+      return;
+    }
+
+    setLoading(true);
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000);
+
+    // Prepare payload
+    const payload = {
+      first_name: formData.firstName,
+      last_name: formData.lastName,
+      username: formData.email,
+      email: formData.email,
+      phone_number: formData.phone,
+      password: formData.password,
+      password2: formData.password2,
+      agreement: formData.agreeToTerms,
+      organization: {
+        name: formData.companyName,
+        job_title: formData.jobTitle,
+        sector: formData.sector,
+        state: formData.stateProvince,
+        country: formData.country
+      }
+    };
+
+    // API call
+    try {
+      const response = await fetch('https://avetiumbackupservice.avetiumconsult.com/api/auth/register/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        signal: controller.signal,
+      });
+
+      clearTimeout(timeout);
+      const data = await response.json();
+
+      if (response.ok) {
+        router.push(`/auth/otp-verification?email=${encodeURIComponent(formData.email)}`);
+      } else {
+        alert(JSON.stringify(data));
+      }
+    } catch (error: any) {
+      if (error.name === 'AbortError') {
+        alert("Request timed out. Please check your connection.");
+      } else {
+        alert("Signup failed. Please try again.");
+      }
+    } finally {
+      setLoading(false);
+    }
+
   };
 
 
   return (
-    <div className="min-h-screen flex flex-col px-8">
+    <>
       <BackSign />
-      {/* Main Form Content */}
-      <div className="flex-grow flex items-center justify-center mt-4 px-4 sm:px-6 lg:px-8">
-        <div className="w-full max-w-md">
-          <h1 className="text-3xl font-bold text-gray-900 text-center mb-7">Let's set you up!</h1>
+      <div className="min-h-screen flex flex-col px-8">
+        <div className="min-h-screen flex flex-col px-8 py-6 max-w-2xl mx-auto">
+          <h1 className="text-3xl font-bold mb-6 text-center">Let's set you up!</h1>
 
-          <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-            <form className="space-y-6" onSubmit={handleSubmit}>
-              {/* Name Section - Stacked layout */}
-              <div className="flex space-x-4">
-                {/* First Name */}
-                <div className="">
-                  <label className="block font-poppins font-medium text-base leading-[16px] tracking-normal">
-                    First Name
-                  </label>
-                  <input
-                    name="firstName"
-                    type="text"
-                    required
-                    placeholder="First Name"
-                    className="mt-1 block w-full lg:w-[14.5rem] lg:h-[2.5rem] border border-[#6F0C15] rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                  />
-                </div>
+          <form onSubmit={handleSubmit} className="space-y-6 bg-white p-6 rounded shadow">
+            {/* Name Fields */}
+            <div className="flex gap-4">
+              <input
+                name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+                required
+                placeholder="First Name"
+                className="w-1/2 border border-[#6F0C15] p-2 rounded"
+              />
+              <input
+                name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+                required
+                placeholder="Last Name"
+                className="w-1/2 border border-[#6F0C15] p-2 rounded"
+              />
+            </div>
 
-                {/* Last Name */}
-                <div className="">
-                  <label className="block font-poppins font-medium text-base leading-[16px] tracking-normal">
-                    Last Name
-                  </label>
-                  <input
-                    name="lastName"
-                    type="text"
-                    required
-                    placeholder="Last Name"
-                    className="mt-1 block w-full border lg:w-[14.5rem] border-[#6F0C15] rounded-md shadow-sm py-2 px-3"
-                    value={formData.lastName}
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
+            {/* Contact Information */}
+            <input
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              placeholder="Business Email"
+              className="w-full border border-[#6F0C15] p-2 rounded"
+            />
+            <input
+              name="phone"
+              type="tel"
+              value={formData.phone}
+              onChange={handleChange}
+              required
+              placeholder="Phone Number"
+              className="w-full border border-[#6F0C15] p-2 rounded"
+            />
 
-              <div className="pt-2">
-                <h2 className="font-poppins font-medium text-base leading-[16px] tracking-normal">Business E-mail</h2>
-                <input
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="Enter your email"
-                  className="mt-1 block w-full lg:w-[30rem] lg:h-[3rem] border border-[#6F0C15] rounded-md shadow-sm py-2 px-3"
-                  value={formData.email}
-                  onChange={handleChange}
-                />
-              </div>
+            {/* Password Fields */}
+            <div className="relative">
+              <input
+                name="password"
+                type={showPassword ? "text" : "password"}
+                value={formData.password}
+                onChange={handleChange}
+                required
+                placeholder="Password"
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
+                className="w-full border border-[#6F0C15] p-2 rounded pr-10"
+              />
+              <span
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-2.5 cursor-pointer"
+              >
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </span>
+              {isFocused && (
+                <ul className="mt-2 text-sm space-y-1">
+                  {requirements.map((req, i) => (
+                    <li key={i} className={req.valid ? 'text-green-600' : 'text-red-600'}>
+                      {req.label}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
 
-              <div className="pt-2">
-                <h2 className="font-poppins font-medium text-base leading-[16px] tracking-normal">Phone Number</h2>
-                <input
-                  name="phone"
-                  type="tel"
-                  required
-                  placeholder="Phone number"
-                  className="mt-1 block w-full border lg:w-[30rem] lg:h-[3rem] border-[#6F0C15] rounded-md shadow-sm py-2 px-3"
-                  value={formData.phone}
-                  onChange={handleChange}
-                />
-              </div>
+            <input
+              name="password2"
+              type={showPassword ? "text" : "password"}
+              value={formData.password2}
+              onChange={handleChange}
+              required
+              placeholder="Confirm Password"
+              className="w-full border border-[#6F0C15] p-2 rounded"
+            />
 
-              <div className="relative pt-2">
-                <h2 className="font-poppins font-medium text-base leading-[16px] tracking-normal">Password</h2>
-                <input
-                  name="password"
-                  type={showPassword ? "text" : "password"}
-                  required
-                  placeholder="Password"
-                  className="mt-1 block w-full border lg:w-[30rem] lg:h-[3rem] border-[#6F0C15] rounded-md shadow-sm py-2 px-3 pr-10"
-                  value={formData.password}
-                  onChange={handleChange}
-                  onFocus={() => setIsFocused(true)}
-                  onBlur={() => setIsFocused(false)}
-                />
-                <span
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute px-[27rem] top-[61%] transform -translate-y-1/2 cursor-pointer text-gray-500"
-                >
-                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                </span>
+            {/* Company Information */}
+            <input
+              name="companyName"
+              value={formData.companyName}
+              onChange={handleChange}
+              required
+              placeholder="Company Name"
+              className="w-full border border-[#6F0C15] p-2 rounded"
+            />
 
-                {/* Password Strength Box */}
-                {isFocused && (
-                  <div className="absolute z-10 mt-2 w-full max-w-md rounded-md border border-gray-300 bg-white shadow-lg p-4 text-sm text-gray-700">
-                    <p className="font-semibold mb-2">
-                      {requirements.every(r => r.valid) ? "Strong" : "Weak"}
-                    </p>
-                    <ul className="space-y-1">
-                      {requirements.map((req, index) => (
-                        <li key={index} className="flex items-center gap-2">
-                          {req.valid ? (
-                            <span className="text-green-500">✔</span>
-                          ) : (
-                            <span className="text-red-500">✖</span>
-                          )}
-                          <span className={req.valid ? "text-gray-700" : "text-gray-400"}>
-                            {req.label}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
+            <div className="flex gap-4">
+              <input
+                name="jobTitle"
+                value={formData.jobTitle}
+                onChange={handleChange}
+                required
+                placeholder="Job Title"
+                className="w-1/2 border border-[#6F0C15] p-2 rounded"
+              />
+              <input
+                name="sector"
+                value={formData.sector}
+                onChange={handleChange}
+                required
+                placeholder="Sector (e.g. FinTech)"
+                className="w-1/2 border border-[#6F0C15] p-2 rounded"
+              />
+            </div>
 
-              <div className="pt-2">
-                <h2 className="font-poppins font-medium  text-base leading-[16px] tracking-normal">Company Name</h2>
-                <input
-                  name="companyName"
-                  type="text"
-                  required
-                  placeholder="Company name"
-                  className="mt-1 block w-full border lg:w-[30rem] lg:h-[3rem] border-[#6F0C15] rounded-md shadow-sm py-2 px-3"
-                  value={formData.companyName}
-                  onChange={handleChange}
-                />
-              </div>
+            {/* Location Information */}
+            <div className="flex gap-4">
+              <input
+                name="country"
+                value={formData.country}
+                onChange={handleChange}
+                required
+                placeholder="Country"
+                className="w-1/2 border border-[#6F0C15] p-2 rounded"
+              />
+              <input
+                name="stateProvince"
+                value={formData.stateProvince}
+                onChange={handleChange}
+                required
+                placeholder="State/Province"
+                className="w-1/2 border border-[#6F0C15] p-2 rounded"
+              />
+            </div>
 
-              <div className="flex space-x-4">
-                {/* First Name */}
-                <div className="">
-                  <label className="block font-poppins font-medium text-base leading-[16px] tracking-normal">
-                    Job Title
-                  </label>
-                  <input
-                    name="jobTitle"
-                    type="text"
-                    required
-                    placeholder="Job Title"
-                    className="mt-1 block w-full lg:w-[14.5rem] lg:h-[2.5rem] border border-[#6F0C15] rounded-md shadow-sm py-2 px-3"
-                    value={formData.jobTitle}
-                    onChange={handleChange}
-                  />
-                </div>
+            {/* Terms Agreement */}
+            <label className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                name="agreeToTerms"
+                checked={formData.agreeToTerms}
+                onChange={handleChange}
+                required
+                className="h-4 w-4"
+              />
+              <span className="text-sm">I agree to the Terms and Privacy Policy</span>
+            </label>
 
-                {/* Last Name */}
-                <div className="">
-                  <label className="block font-poppins font-medium lg:text-sm text-base leading-[16px] tracking-normal">
-                    Sector (Oil  &  Gas, FinTech, He...)
-                  </label>
-                  <input
-                    name="sector"
-                    type="text"
-                    required
-                    placeholder="sector"
-                    className="mt-1 block w-full border lg:w-[14.5rem] lg:h-[2.5rem] border-[#6F0C15] rounded-md shadow-sm py-2 px-3"
-                    value={formData.sector}
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
-
-              <div className="flex space-x-4">
-                {/* First Name */}
-                <div className="">
-                  <label className="block font-poppins font-medium text-base leading-[16px] tracking-normal">
-                    Country
-                  </label>
-                  <input
-                    name="country"
-                    type="text"
-                    required
-                    placeholder="Country"
-                    className="mt-1 block w-full lg:w-[14.5rem] lg:h-[2.5rem] border border-[#6F0C15] rounded-md shadow-sm py-2 px-3"
-                    value={formData.country}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                {/* Last Name */}
-                <div className="">
-                  <label className="block font-poppins font-medium text-base leading-[16px] tracking-normal">
-                    State/Province
-                  </label>
-                  <input
-                    name="stateProvince"
-                    type="text"
-                    required
-                    placeholder="State"
-                    className="mt-1 block w-full border lg:w-[14.5rem] border-[#6F0C15] rounded-md shadow-sm py-2 px-3"
-                    value={formData.stateProvince}
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
-
-              {/* Terms and Conditions */}
-              <div className="flex items-start pt-6">
-                <div className="flex items-center h-5">
-                  <input
-                    name="agreeToTerms"
-                    type="checkbox"
-                    required
-                    className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-[#6F0C15] rounded"
-                    checked={formData.agreeToTerms}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div className="ml-3 text-sm">
-                  <label className="font-medium text-gray-700">
-                    By clicking this you are agreeing to Avetium Technologies Terms and conditions and privacy policy.
-                  </label>
-                </div>
-              </div>
-
-              {/* Submit Button */}
-              <div className="pt-4">
-                <button
-                  type="submit"
-                  className="lg:w-[30rem] w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white cursor-pointer"
-                  style={{ backgroundColor: colors.primary }}
-                >
-                  Next
-                </button>
-              </div>
-            </form>
-          </div>
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={loading}
+              className={`w-full py-2 rounded font-semibold ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#6F0C15] text-white'
+                }`}
+            >
+              {loading ? 'Submitting...' : 'Next'}
+            </button>
+          </form>
         </div>
       </div>
-    </div>
+    </>
   );
 }

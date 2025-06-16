@@ -34,9 +34,9 @@ const VerificationCode: React.FC = () => {
 
     // Submit OTP and navigate
     const handleVerify = async () => {
-        const otp = code.join("");
+        const otp = code.join("api");
         try {
-            const res = await fetch("", {
+            const res = await fetch("https://avetiumbackupservice.avetiumconsult.com/api/auth/otp/verify/", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ otp }),
@@ -56,7 +56,7 @@ const VerificationCode: React.FC = () => {
 
     return (
         <div className="px-8">
-            <BackSign />
+            {/* <BackSign /> */}
             <div className="max-w-md mx-auto p-8 bg-white rounded-2xl shadow-2xl mt-4">
                 <Link href="/signup">
                     <button className="text-sm mb-4 flex items-center text-[#6F0C15] cursor-pointer">

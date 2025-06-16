@@ -45,7 +45,7 @@ export default function PricingTable() {
         </p>
       </div>
 
-      <div className="flex flex-col md:flex-row flex-wrap justify-center items-stretch gap-6 md:gap-4">
+      <div className="flex flex-col md:flex-row flex-wrap justify-center items-stretch gap-6 md:gap-6">
         {pricingPlans.map((plan) => (
           <div
             key={plan.name}

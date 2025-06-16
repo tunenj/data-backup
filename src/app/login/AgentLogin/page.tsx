@@ -22,7 +22,7 @@ export default function LoginPage({
         {/* Sign-in as Admin Button */}
         <div className="relative mt-2 md:mt-0">
           <Link
-            href="/AdminLogin"
+            href="/login/AdminLogin"
             className="inline-flex items-center text-sm font-medium text-[#6F0C15] border border-[#6F0C15] rounded-md px-6 py-2 pr-6 bg-white"
           >
             Sign-in as Admin
