@@ -42,9 +42,9 @@ export default function LoginPage({
       {/* Main Content */}
       <div className="flex flex-1 flex-col md:flex-row justify-between items-start px-4 md:px-9 pt-6 md:pt-8 gap-8">
         {/* Login Form */}
-        <div className="w-full md:max-w-md">
-          <h2 className="text-center text-xl font-semibold mb-8">
-            Supervisor Sign In
+        <div className="w-full md:max-w-md lg:w-[45rem] h-[30rem] border border-gray-400 rounded-lg px-6">
+          <h2 className="text-center text-xl font-semibold mb-8 lg:mt-6">
+            Agent Sign In
           </h2>
           <form className="space-y-6">
             <div>
@@ -108,16 +108,16 @@ export default function LoginPage({
             </span>
             <Link
               href="/about-signin"
-              className="text-gray-500 hover:underline"
+              className="text-gray-500 hover:underline cursor-pointer"
             >
               Learn more about signing in
             </Link>
           </div>
         </div>
 
-        {/* Did You Know Card */}
+        {/*  Card */}
         <div className="w-full md:max-w-xl md:ml-16">
-          <div className="rounded-lg border border-[#6F0C15] overflow-hidden bg-white shadow-sm">
+          <div className="rounded-lg border border-[#6F0C15] overflow-hidden bg-white shadow-sm p-2">
             <div className="h-48 md:h-[20rem] w-full relative">
               <Image
                 src={Infos}
@@ -130,13 +130,13 @@ export default function LoginPage({
               <div className="font-semibold text-[#6F0C15] text-lg mb-2">
                 Did You Know?
               </div>
-              <div className="text-sm text-[#6F0C15] mb-4">
+              <div className="text-sm text-[#6F0C15] mb-2">
                 Company name got your workloads covered - cloud, on-prem,
                 remote sites, and everything else in between. Our Zero Trust
                 principles are baked into every backup, ensuring your data is
                 protected and ready for recovery.
               </div>
-              <button className="w-full border border-[#6F0C15] text-white bg-[#6F0C15] rounded-md py-2 font-medium">
+              <button className="w-full border border-[#6F0C15] text-white bg-[#6F0C15] rounded-md lg:px-4 py-2 font-medium">
                 Learn More
               </button>
             </div>

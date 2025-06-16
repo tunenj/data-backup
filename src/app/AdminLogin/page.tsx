@@ -20,13 +20,13 @@ export default function LoginPage({
             priority
           />
         </Link>
-        {/* Sign-in as Supervisor Button */}
+        {/* Sign-in as Agent Button */}
         <div className="relative mt-2 md:mt-0">
           <Link
-            href="/SupervisorLogin"
+            href="/AgentLogin"
             className="inline-flex items-center text-sm font-medium text-[#6F0C15] border border-[#6F0C15] rounded-md px-6 py-2 pr-6 bg-white"
           >
-            Sign-in as Supervisor
+            Sign-in as Agent
           </Link>
           <span className="absolute -top-3 -right-3 w-8 h-8 bg-[#6F0C15] rounded-full flex items-center justify-center shadow-md">
             <Image
@@ -43,8 +43,8 @@ export default function LoginPage({
       {/* Main Content */}
       <div className="flex flex-col md:flex-row flex-1 justify-between items-start px-4 md:px-9 pt-6 md:pt-8 gap-8">
         {/* Login Form */}
-        <div className="w-full md:max-w-md">
-          <h2 className="text-center text-xl font-semibold mb-8">
+        <div className="w-full md:max-w-md lg:w-[45rem] h-[30rem] border border-gray-400 rounded-lg px-6">
+          <h2 className="text-center text-xl font-semibold mb-8 lg:mt-6">
             Admin Sign In
           </h2>
           <form className="space-y-6">
@@ -116,9 +116,9 @@ export default function LoginPage({
           </div>
         </div>
 
-        {/* Did You Know Card */}
+        {/*  Card */}
         <div className="w-full md:max-w-xl">
-          <div className="rounded-lg border border-[#6F0C15] overflow-hidden bg-white shadow-sm">
+          <div className="rounded-lg border border-[#6F0C15] overflow-hidden bg-white shadow-sm p-2">
             <div className="h-48 md:h-[20rem] w-full relative">
               <Image
                 src={Info}
@@ -131,13 +131,13 @@ export default function LoginPage({
               <div className="font-semibold text-[#6F0C15] text-lg mb-2">
                 Did You Know?
               </div>
-              <div className="text-sm text-[#6F0C15] mb-4">
+              <div className="text-sm text-[#6F0C15] mb-2">
                 Company name got your workloads covered - cloud, on-prem,
                 remote sites, and everything else in between. Our Zero Trust
                 principles are baked into every backup, ensuring your data is
                 protected and ready for recovery.
               </div>
-              <button className="w-full border border-[#6F0C15] text-white bg-[#6F0C15] rounded-md py-2 font-medium">
+              <button className="w-full border border-[#6F0C15] text-white bg-[#6F0C15] rounded-md py-2 font-medium cursor-pointer">
                 Learn More
               </button>
             </div>

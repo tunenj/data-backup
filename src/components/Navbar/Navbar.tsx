@@ -99,9 +99,9 @@ export default function Navbar() {
                     Admin Sign in
                   </div>
                 </Link>
-                <Link href="/SupervisorLogin" onClick={() => setSignInOpen(false)}>
+                <Link href="/AgentLogin" onClick={() => setSignInOpen(false)}>
                   <div className="px-4 py-2  text-[#6F0C15] cursor-pointer hover:bg-[#6F0C15] hover:text-white hover:rounded-lg hover:mb-2">
-                    Supervisor Sign in
+                    Agent Sign in
                   </div>
                 </Link>
               </div>
@@ -147,12 +147,12 @@ export default function Navbar() {
 
               {/* Sign in options (Mobile) */}
               <div className="flex flex-col space-y-2">
-                <Link href="/SupervisorLogin" onClick={() => setMenuOpen(false)}>
+                <Link href="/AgentLogin" onClick={() => setMenuOpen(false)}>
                   <button
                     style={{ backgroundColor: colors.primary }}
                     className="text-white font-medium px-4 py-2 rounded-md"
                   >
-                    Supervisor
+                    Agent
                   </button>
                 </Link>
                 <Link href="/AdminLogin" onClick={() => setMenuOpen(false)}>

@@ -34,12 +34,12 @@ export default function Hero() {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 mt-24">
           <a href='#'
-            style={{ backgroundColor: colors.primary }} className="text-white px-6 py-3 rounded-full font-semibold">
+            style={{ backgroundColor: colors.primary }} className="text-white px-6 py-3 rounded-xl font-semibold">
             Start Free Trial
           </a>
           <a href='#'
             style={{ borderColor: colors.primary }}
-            className="bg-transparent text-white px-6 py-3 rounded-full font-semibold border-2"
+            className="bg-transparent text-white px-6 py-3 rounded-xl font-semibold border-2"
           >
             View Pricing
           </a>
