@@ -56,7 +56,7 @@ const VerificationCode: React.FC = () => {
 
     return (
         <div className="px-8">
-            {/* <BackSign /> */}
+            <BackSign />
             <div className="max-w-md mx-auto p-8 bg-white rounded-2xl shadow-2xl mt-4">
                 <Link href="/signup">
                     <button className="text-sm mb-4 flex items-center text-[#6F0C15] cursor-pointer">

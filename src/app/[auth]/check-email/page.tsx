@@ -38,7 +38,6 @@ export default function CheckEmail() {
           >
             Open Email app
           </button>
-
           <div className="w-full flex justify-between items-center text-sm">
             <span className="text-gray-400">Didn't receive email?</span>
             <a href="#" className="text-blue-600 hover:underline font-medium">
