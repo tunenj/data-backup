@@ -1,31 +1,29 @@
 {
-  "name": "backup-pro",
+  "name": "my-app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_OPTIONS=--max-old-space-size=4096 next dev",
-    "build": "cross-env NODE_OPTIONS=--max-old-space-size=4096 next build",
-    "start": "cross-env NODE_OPTIONS=--max-old-space-size=4096 next start",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@heroicons/react": "^2.2.0",
-    "axios": "^1.9.0",
-    "cookie": "^1.0.2",
-    "lucide-react": "^0.511.0",
+    "cookies-next": "^5.1.0",
+    "jose": "^6.0.11",
+    "jsonwebtoken": "^9.0.2",
     "next": "15.3.2",
+    "nookies": "^2.5.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "recharts": "^2.15.3"
+    "zod": "^3.24.4"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "cross-env": "^7.0.3",
-    "eslint": "9.29.0",
-    "eslint-config-next": "15.3.3",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

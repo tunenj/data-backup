@@ -49,6 +49,33 @@ const Sidebar = ({ role }: { role: "admin" | "agent" }) => {
     }
   };
 
+
+  const handleLogout = async () => {
+    const token = localStorage.getItem("token"); // Or wherever you store it
+
+    try {
+      const response = await fetch("https://avetiumbackupservice.avetiumconsult.com/api/auth/logout/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // backend expects token here
+        },
+      });
+
+      if (response.ok) {
+        // Clear token and redirect to login
+        localStorage.removeItem("token");
+        window.location.href = "/login"; // or use router.push("/login");
+      } else {
+        const errorData = await response.json();
+        alert(errorData.message || "Logout failed.");
+      }
+    } catch (err) {
+      alert("Network error during logout.");
+    }
+  };
+
+
   return (
     <>
       {/* Toggle button */}
@@ -102,7 +129,7 @@ const Sidebar = ({ role }: { role: "admin" | "agent" }) => {
                   height={20}
                   className="object-contain"
                 />
-                
+
                 {item.name}
               </button>
             ) : (
@@ -126,10 +153,14 @@ const Sidebar = ({ role }: { role: "admin" | "agent" }) => {
         </nav>
 
         <div className="mt-auto px-4 py-4">
-          <button className="w-full flex items-center justify-center gap-2 bg-[#6F0C154D] text-[#6F0C15] py-2 hover:text-white transition cursor-pointer">
+          <button
+            onClick={handleLogout}
+            className="w-full flex items-center justify-center gap-2 bg-[#6F0C154D] text-[#6F0C15] py-2 hover:text-white transition cursor-pointer"
+          >
             <img src="/icons/logout.png" alt="Logout icon" className="w-4 h-4" />
             Logout
           </button>
+
         </div>
       </aside>
     </>

@@ -26,29 +26,47 @@ export default function AdminLogin({
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
+  e.preventDefault();
+  setLoading(true);
 
-    try {
-      const response = await fetch("", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+  try {
+    const response = await fetch("https://avetiumbackupservice.avetiumconsult.com/api/auth/login/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
 
-      const result = await response.json();
+    const result = await response.json();
+    console.log("Login API response:", result);
 
-      if (response.ok) {
-        router.push("/dashboard/admin");
-      } else {
-        alert(result.message || "Login failed");
+    if (response.ok) {
+      const { access, refresh, token } = result;
+
+      if (access) {
+        localStorage.setItem("accessToken", access);
       }
-    } catch (error) {
-      alert("Network error. Please try again.");
-    } finally {
-      setLoading(false);
+      if (refresh) {
+        localStorage.setItem("refreshToken", refresh);
+      }
+      if (token) {
+        localStorage.setItem("sessionToken", token);
+      }
+
+      // Ensure localStorage is written before redirect
+      setTimeout(() => {
+        router.push("/dashboard/admin");
+      }, 100); // short delay to persist tokens
+    } else {
+      alert(result.message || "Login failed");
     }
-  };
+  } catch (error) {
+    console.error("Login error:", error);
+    alert("Network error. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-white flex flex-col lg:px-20">
@@ -109,8 +127,7 @@ export default function AdminLogin({
             <button
               type="submit"
               disabled={loading}
-              className={`w-full bg-[#6F0C15] text-white font-semibold py-2 rounded-md mt-2 hover:bg-[#4e0910] transition cursor-pointer ${loading ? "opacity-50 cursor-not-allowed" : ""
-                }`}
+              className={`w-full bg-[#6F0C15] text-white font-semibold py-2 rounded-md mt-2 hover:bg-[#4e0910] transition cursor-pointer ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
             >
               {loading ? "Logging in..." : "Next"}
             </button>
