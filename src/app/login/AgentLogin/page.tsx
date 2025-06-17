@@ -1,25 +1,26 @@
+'use client';
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { Eye, EyeOff } from "lucide-react";
 
-export default function LoginPage({
-  logoSrc = "/images/logo.png",
-  Arrow = "/icons/Arrow.png",
-  Infos = "/images/Infos.png",
-}) {
+export default function LoginPage() {
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
     <div className="min-h-screen bg-white flex flex-col lg:px-20">
       <div className="flex justify-between items-start px-4 md:px-12 pt-6 md:pt-8">
-        {/* Logo */}
         <Link href="/">
           <Image
-            src={logoSrc}
+            src="/images/logo.png"
             alt="Avetium Technologies"
             width={140}
             height={32}
             priority
           />
         </Link>
-        {/* Sign-in as Admin Button */}
+
         <div className="relative mt-2 md:mt-0">
           <Link
             href="/login/AdminLogin"
@@ -28,30 +29,20 @@ export default function LoginPage({
             Sign-in as Admin
           </Link>
           <span className="absolute -top-3 -right-3 w-8 h-8 bg-[#6F0C15] rounded-full flex items-center justify-center shadow-md">
-            <Image
-              src={Arrow}
-              alt="Arrow"
-              width={16}
-              height={16}
-              className="text-white"
-            />
+            <Image src="/icons/Arrow.png" alt="Arrow" width={16} height={16} />
           </span>
         </div>
       </div>
 
-      {/* Main Content */}
       <div className="flex flex-1 flex-col md:flex-row justify-between items-start px-4 md:px-9 pt-6 md:pt-8 gap-8">
-        {/* Login Form */}
         <div className="w-full md:max-w-md lg:w-[45rem] h-[30rem] border border-gray-400 rounded-lg px-6">
           <h2 className="text-center text-xl font-semibold mb-8 lg:mt-6">
             Agent Sign In
           </h2>
+
           <form className="space-y-6">
             <div>
-              <label
-                className="block text-sm font-medium mb-1"
-                htmlFor="email"
-              >
+              <label htmlFor="email" className="block text-sm font-medium mb-1">
                 E-mail
               </label>
               <input
@@ -62,21 +53,28 @@ export default function LoginPage({
                 required
               />
             </div>
+
             <div>
-              <label
-                className="block text-sm font-medium mb-1"
-                htmlFor="password"
-              >
+              <label htmlFor="password" className="block text-sm font-medium mb-1">
                 Password
               </label>
-              <input
-                id="password"
-                type="password"
-                placeholder="Password"
-                className="w-full border border-[#6F0C15] rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#6F0C15] text-sm"
-                required
-              />
+              <div className="relative">
+                <input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password"
+                  className="w-full border border-[#6F0C15] rounded-md px-3 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-[#6F0C15] text-sm"
+                  required
+                />
+                <span
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  className="absolute right-3 top-2.5 text-gray-600 cursor-pointer"
+                >
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </span>
+              </div>
             </div>
+
             <div className="flex items-center justify-between">
               <label className="flex items-center text-sm">
                 <input type="checkbox" className="mr-2 accent-[#6F0C15]" />
@@ -89,6 +87,7 @@ export default function LoginPage({
                 Forgot Password?
               </Link>
             </div>
+
             <button
               type="submit"
               className="w-full bg-[#6F0C15] text-white font-semibold py-2 rounded-md mt-2 hover:bg-[#4e0910] transition cursor-pointer"
@@ -96,6 +95,7 @@ export default function LoginPage({
               Next
             </button>
           </form>
+
           <div className="flex flex-col sm:flex-row justify-between items-center mt-4 text-sm gap-2">
             <span>
               Don't have an account?{" "}
@@ -115,12 +115,11 @@ export default function LoginPage({
           </div>
         </div>
 
-        {/*  Card */}
         <div className="w-full md:max-w-xl md:ml-16">
           <div className="rounded-lg border border-[#6F0C15] overflow-hidden bg-white shadow-sm p-2">
             <div className="h-48 md:h-[20rem] w-full relative">
               <Image
-                src={Infos}
+                src="/images/Infos.png"
                 alt="info"
                 fill
                 style={{ objectFit: "cover" }}

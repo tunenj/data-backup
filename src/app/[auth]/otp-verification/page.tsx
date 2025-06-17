@@ -1,21 +1,22 @@
-"use client";
+'use client';
 
-import React, { useRef } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import BackSign from "@/components/BacksignHeader/BacksignHeader";
+import React, { useRef, useEffect, useState } from 'react';
+import Link from 'next/link';
+import { useSearchParams, useRouter } from 'next/navigation';
+import BackSign from '@/components/BacksignHeader/BacksignHeader';
 
 const CODE_LENGTH = 4;
 
 const VerificationCode: React.FC = () => {
-    const [code, setCode] = React.useState<string[]>(Array(CODE_LENGTH).fill(""));
-    const [error, setError] = React.useState<string | null>(null);
-    const inputsRef = useRef<Array<HTMLInputElement | null>>([]);
+    const [code, setCode] = useState<string[]>(Array(CODE_LENGTH).fill(''));
+    const [error, setError] = useState<string | null>(null);
+    const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
+    const searchParams = useSearchParams();
+    const type = searchParams.get('type'); // "register" or "forgot"
     const router = useRouter();
 
-    // Handle input change and auto-focus next
     const handleChange = (value: string, idx: number) => {
-        if (!/^[0-9]?$/.test(value)) return; // Only allow numbers
+        if (!/^[0-9]?$/.test(value)) return;
         const newCode = [...code];
         newCode[idx] = value;
         setCode(newCode);
@@ -25,32 +26,45 @@ const VerificationCode: React.FC = () => {
         }
     };
 
-    // Handle backspace to focus previous
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, idx: number) => {
-        if (e.key === "Backspace" && !code[idx] && idx > 0) {
+        if (e.key === 'Backspace' && !code[idx] && idx > 0) {
             inputsRef.current[idx - 1]?.focus();
         }
     };
 
-    // Submit OTP and navigate
     const handleVerify = async () => {
-        const otp = code.join("api");
+        const otp = code.join('');
+        let endpoint = '';
+
+        if (type === 'register') {
+            endpoint = 'https://avetiumbackupservice.avetiumconsult.com/api/auth/otp/verify/';
+        } else if (type === 'forgot') {
+            endpoint = 'https://avetiumbackupservice.avetiumconsult.com/api/auth/password/otp/verify/';
+        } else {
+            setError('Invalid flow type');
+            return;
+        }
+
         try {
-            const res = await fetch("https://avetiumbackupservice.avetiumconsult.com/api/auth/otp/verify/", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
+            const res = await fetch(endpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ otp }),
             });
 
             const data = await res.json();
 
             if (res.ok) {
-                router.push("/admin/dashboard");
+                if (type === 'register') {
+                    router.push('/dashboard/admin');
+                } else if (type === 'forgot') {
+                    router.push('/auth/newpasswordCreation');
+                }
             } else {
-                setError(data.message || "OTP verification failed");
+                setError(data.message || 'OTP verification failed');
             }
         } catch (err) {
-            setError("Something went wrong. Please try again.");
+            setError('Something went wrong. Please try again.');
         }
     };
 
@@ -58,7 +72,7 @@ const VerificationCode: React.FC = () => {
         <div className="px-8">
             <BackSign />
             <div className="max-w-md mx-auto p-8 bg-white rounded-2xl shadow-2xl mt-4">
-                <Link href="/signup">
+                <Link href={type === 'register' ? '/signup' : '/auth/forgot-password'}>
                     <button className="text-sm mb-4 flex items-center text-[#6F0C15] cursor-pointer">
                         <span className="mr-2">&larr;</span> Back
                     </button>
@@ -95,7 +109,7 @@ const VerificationCode: React.FC = () => {
                     <p className="text-red-500 text-center text-sm mb-4">{error}</p>
                 )}
                 <div className="text-center text-sm text-gray-500">
-                    Didn&apos;t get the email?{" "}
+                    Didn&apos;t get the email?{' '}
                     <button className="text-[#0377BFEB] cursor-pointer">Send Again</button>
                 </div>
             </div>
