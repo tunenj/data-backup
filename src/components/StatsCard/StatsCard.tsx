@@ -1,3 +1,7 @@
+'use client';
+
+import Image from 'next/image';
+
 interface StatsCardProps {
   title: string;
   value: string;
@@ -7,11 +11,10 @@ interface StatsCardProps {
   icon?: string; // path to image
 }
 
-
 export default function StatsCard({ title, value, subtext, footer, active }: StatsCardProps) {
   return (
     <div
-      className={`flex-1 rounded-xl p-4  lg:mt-6 shadow-sm border transition-colors duration-200 
+      className={`flex-1 rounded-xl p-4 shadow-sm border transition-colors duration-200 
         ${active ? 'bg-[#6F0C15] text-white' : 'bg-white border-[#6F0C15] border-2 text-[#6F0C15] lg:mt-6'}`}
     >
       <div className="flex justify-between items-start">
@@ -23,29 +26,23 @@ export default function StatsCard({ title, value, subtext, footer, active }: Sta
       </div>
 
       {/* Placeholder for chart */}
-      {!active ? (
-        <div className="h-[54.84px] my-3 w-full rounded bg-white text-[#6F0C15]">
-          <img
-            src="/icons/fill2.png"
-            alt="Chart"
-            className="h-full w-full object-cover rounded"
-          />
-        </div>
-      ) : (
-        <img
-          src="/icons/fill.png"
+      <div className="h-[54.84px] my-3 w-full rounded bg-white text-[#6F0C15] relative">
+        <Image
+          src={active ? "/icons/fill.png" : "/icons/fill2.png"}
           alt="Chart"
-          className="h-[54.84px] my-3 w-full object-cover rounded"
+          layout="fill"
+          objectFit="cover"
+          className="rounded"
         />
-      )}
+      </div>
 
       {subtext && (
-        <p className={`text-xs ${active ? 'text-[#FF5733]' : 'text-[#FF5733]'}`}>
+        <p className="text-xs text-[#FF5733]">
           {subtext}
         </p>
       )}
       {footer && (
-        <p className={`text-xs mt-1 ${active ? 'text-[#FF5733]' : 'text-[#FF5733]'}`}>
+        <p className="text-xs mt-1 text-[#FF5733]">
           {footer}
         </p>
       )}

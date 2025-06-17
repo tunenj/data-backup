@@ -28,13 +28,11 @@ export default function ForgotPassword() {
       const data = await res.json();
 
       if (res.ok) {
-        // success — redirect to check email page
         router.push("/auth/otp-verification");
       } else {
-        // show API error message
         setError(data.message || "Something went wrong. Please try again.");
       }
-    } catch (err) {
+    } catch {
       setError("Network error. Please try again.");
     } finally {
       setLoading(false);
@@ -51,7 +49,7 @@ export default function ForgotPassword() {
           </div>
           <h2 className="text-2xl font-semibold mt-4">Forgot Password</h2>
           <p className="text-gray-600 text-sm mt-1">
-            No worries, we'll send you reset instructions.
+            No worries, we&apos;ll send you reset instructions.
           </p>
 
           {error && (

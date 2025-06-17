@@ -19,22 +19,28 @@ const ExportTopbar = () => (
           src="/images/logo.png"
           alt="Avetium"
           width={180}
-          height={46.02}
+          height={46}
           priority
         />
       </div>
     </Link>
     <div className="flex">
       <button className="p-2 flex items-center" aria-label="Notifications">
-        <img src="/icons/bell.png" alt="Notifications" className="w-4 h-4" />
+        <Image
+          src="/icons/bell.png"
+          alt="Notifications"
+          width={16}
+          height={16}
+          className="w-4 h-4"
+        />
         <span className="hidden md:inline ml-1 text-sm">Notifications</span>
       </button>
       <div className="flex items-center gap-1 cursor-pointer pl-1">
         <Image
           src="/icons/Ellipse.png"
           alt="User"
-          width={32}
-          height={32}
+          width={28}
+          height={28}
           className="rounded-full w-7 h-7"
         />
         <span className="hidden lg:inline text-sm text-black">Jane F.</span>
@@ -45,11 +51,8 @@ const ExportTopbar = () => (
 );
 
 const ExportLogsPage = () => {
-  // Example data for total items and items per page
   const totalExports = 30;
   const itemsPerPage = 10;
-
-  // Optional: you can add state to track page and pass to ExportRecordsTable or filters
 
   return (
     <DashboardLayout topbar={<ExportTopbar />}>
@@ -59,7 +62,12 @@ const ExportLogsPage = () => {
         </div>
         <div className="flex items-center gap-2 sm:gap-3 mt-2 lg:mt-0 lg:ml-auto text-sm sm:text-[15px] font-medium">
           <h2>Hodu CC</h2>
-          <img src="/icons/dot.png" alt="Dot" />
+          <Image
+            src="/icons/dot.png"
+            alt="Dot"
+            width={8}
+            height={8}
+          />
           <p>Connected</p>
         </div>
       </div>

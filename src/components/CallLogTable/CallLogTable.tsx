@@ -1,6 +1,7 @@
-"use client";
+'use client';
 
 import React from "react";
+import Image from "next/image";
 
 interface CallLog {
   id: string;
@@ -13,7 +14,6 @@ interface CallLog {
   hungUpBy: "Agent" | "Customer";
 }
 
-// api call
 const logs: CallLog[] = [
   {
     id: "CRM801",
@@ -35,8 +35,8 @@ const logs: CallLog[] = [
     duration: "00:03:45",
     hungUpBy: "Customer",
   },
-    {
-    id: "CRM802",
+  {
+    id: "CRM803",
     callType: "Inbound",
     phoneNumber: "+234 80 987654321",
     agentName: "Joseph Emmanuel",
@@ -45,8 +45,8 @@ const logs: CallLog[] = [
     duration: "00:03:45",
     hungUpBy: "Customer",
   },
-    {
-    id: "CRM802",
+  {
+    id: "CRM804",
     callType: "Outbound",
     phoneNumber: "+234 80 987654321",
     agentName: "Natail Craig",
@@ -65,13 +65,9 @@ export default function CallLogTable() {
           <tr>
             <th className="px-2 py-2">
               <div className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  className="w-4 h-4 accent-current"
-                  aria-label="Select All"
-                />
+                <input type="checkbox" className="w-4 h-4 accent-current" />
                 <span>Call ID</span>
-                <img src="/icons/TableIcon.png" alt="Sort" className="w-3 h-3" />
+                <Image src="/icons/TableIcon.png" alt="Sort" width={12} height={12} />
               </div>
             </th>
             <th className="px-2 py-2">Call Type</th>
@@ -79,30 +75,30 @@ export default function CallLogTable() {
             <th className="px-2 py-2">
               <div className="flex items-center gap-2">
                 Agent Name
-                <img src="/icons/TableIcon.png" alt="Sort" className="w-3 h-3" />
+                <Image src="/icons/TableIcon.png" alt="Sort" width={12} height={12} />
               </div>
             </th>
             <th className="px-2 py-2">Campaign</th>
             <th className="px-2 py-2">
               <div className="flex items-center gap-2">
                 Start Time
-                <img src="/icons/TableIcon.png" alt="Sort" className="w-3 h-3" />
+                <Image src="/icons/TableIcon.png" alt="Sort" width={12} height={12} />
               </div>
             </th>
             <th className="px-3 py-2">
               <div className="flex items-center gap-2">
                 Duration
-                <img src="/icons/TableIcon.png" alt="Sort" className="w-3 h-3" />
+                <Image src="/icons/TableIcon.png" alt="Sort" width={12} height={12} />
               </div>
             </th>
             <th className="px-3 py-2">
               <div className="flex items-center gap-2">
                 Hungup By
-                <img src="/icons/TableIcon.png" alt="Sort" className="w-3 h-3" />
+                <Image src="/icons/TableIcon.png" alt="Sort" width={12} height={12} />
               </div>
             </th>
             <th className="px-3 py-2">
-              <img src="/icons/Download.png" alt="Download" className="w-2.5 h-3 mx-auto" />
+              <Image src="/icons/Download.png" alt="Download" width={10} height={12} />
             </th>
           </tr>
         </thead>
@@ -110,10 +106,9 @@ export default function CallLogTable() {
           {logs.map((log, i) => (
             <tr key={i} className="hover:bg-gray-50">
               <td className="flex px-3 py-2 gap-3">
-                <button className="font-normal text-[12px] leading-[18px] tracking-normal flex items-center gap-2">
-                  <img src="/icons/play.png" alt="Play" />
+                <button className="font-normal text-[12px] flex items-center gap-2">
+                  <Image src="/icons/play.png" alt="Play" width={16} height={16} />
                 </button>
-
                 <span className="text-gray-700">#{log.id}</span>
               </td>
               <td className="px-1 py-2">{log.callType}</td>
@@ -125,7 +120,7 @@ export default function CallLogTable() {
               <td className="px-1 py-2 text-[#6F0C15]">{log.hungUpBy}</td>
               <td className="px-1 py-2">
                 <button>
-                  <img src="/icons/Download.png" alt="Download" className="w-2.5 h-3" />
+                  <Image src="/icons/Download.png" alt="Download" width={10} height={12} />
                 </button>
               </td>
             </tr>

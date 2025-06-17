@@ -6,12 +6,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react";
 
-
 export default function AdminLogin() {
   const router = useRouter();
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false); // <-- Eye toggle state
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -128,7 +127,7 @@ export default function AdminLogin() {
 
           <div className="flex flex-col sm:flex-row justify-between items-center mt-4 text-sm gap-2">
             <span>
-              Don't have an account?{" "}
+              Don&#39;t have an account?{" "}
               <Link href="/signup" className="text-blue-600 hover:underline font-medium">Sign up</Link>
             </span>
             <Link href="/about-signin" className="text-gray-500 hover:underline">Learn more about signing in</Link>

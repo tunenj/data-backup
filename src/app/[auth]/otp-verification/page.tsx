@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';
 import BackSign from '@/components/BacksignHeader/BacksignHeader';
@@ -63,7 +63,7 @@ const VerificationCode: React.FC = () => {
             } else {
                 setError(data.message || 'OTP verification failed');
             }
-        } catch (err) {
+        } catch {
             setError('Something went wrong. Please try again.');
         }
     };

@@ -98,7 +98,7 @@ export default function LoginPage() {
 
           <div className="flex flex-col sm:flex-row justify-between items-center mt-4 text-sm gap-2">
             <span>
-              Don't have an account?{" "}
+              Don&#39;t have an account?{" "}
               <Link
                 href="/signup"
                 className="text-blue-600 hover:underline font-medium"

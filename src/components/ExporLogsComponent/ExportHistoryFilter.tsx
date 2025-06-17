@@ -1,12 +1,8 @@
 'use client';
 import React from 'react';
-import { ExportRecord } from '@/constants/types';
 import { FilterControls } from './FilterControls';
-import { ExportRecordsTable } from './ExportRecordsTable';
 
 const FilterExportHistory: React.FC = () => {
-  // Sample data
-
   const stats = {
     totalExports: 125,
     success: {

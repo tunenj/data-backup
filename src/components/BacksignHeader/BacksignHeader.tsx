@@ -4,12 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function BackSign({
-    logo = "/images/logo.png",
-    Arrow = "/icons/Arrow.png",
-    icon = "/icons/icon.png",
-    Arrow2 = "/icons/Arrow2.png"
-}) {
+export default function BackSign() {
     const [open, setOpen] = useState(false);
 
     return (
@@ -18,7 +13,7 @@ export default function BackSign({
                 {/* Logo */}
                 <Link href="/">
                     <Image
-                        src={logo}
+                        src="/images/logo.png"
                         alt="Avetium Technologies"
                         width={140}
                         height={32}
@@ -32,11 +27,11 @@ export default function BackSign({
                         onClick={() => setOpen(!open)}
                         className="inline-flex items-center text-sm font-medium text-[#6F0C15] border border-[#6F0C15] rounded-md px-6 py-2 bg-white cursor-pointer"
                     >
-                        Login to Exsiting Account
+                        Login to Existing Account
                     </button>
                     <span className="absolute -top-3 -right-3 w-8 h-8 bg-[#6F0C15] rounded-full flex items-center justify-center shadow-md">
                         <Image
-                            src={Arrow}
+                            src="/icons/Arrow.png"
                             alt="Arrow"
                             width={16}
                             height={16}
@@ -64,5 +59,5 @@ export default function BackSign({
             </div>
             <div className="w-full h-px bg-[#6F0C15] my-1"></div>
         </div>
-    )
+    );
 }

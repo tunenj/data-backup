@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { Search, ChevronDown, Menu } from "lucide-react";
-import { useState } from "react";
-import Link from "next/link";
+import Image from 'next/image';
+import { Search, ChevronDown, Menu } from 'lucide-react';
+import { useState } from 'react';
+import Link from 'next/link';
 
 const Topbar = () => {
   const [showMobileSearch, setShowMobileSearch] = useState(false);
@@ -37,23 +37,23 @@ const Topbar = () => {
       {/* Desktop Actions */}
       <div className="hidden lg:flex items-center gap-3 ml-auto">
         <button className="flex items-center gap-1 px-3 py-1 border border-[#6F0C15] font-medium rounded-full text-[#6F0C15] text-sm hover:bg-[#f5d5d9]">
-          <img src="/icons/reset.png" alt="Reset" className="w-4 h-4" />
+          <Image src="/icons/reset.png" alt="Reset" width={16} height={16} />
           Reset Filters
         </button>
 
         <button className="flex items-center gap-1 px-3 py-1 border border-[#6F0C15] font-medium rounded-full text-[#6F0C15] text-sm hover:bg-[#f5d5d9]">
-          <img src="/icons/history.png" alt="History" className="w-4 h-4" />
+          <Image src="/icons/history.png" alt="History" width={16} height={16} />
           Export History
         </button>
 
         <button className="flex items-center gap-1 px-3 py-1 bg-[#6F0C15] text-white font-medium rounded-full text-sm hover:bg-[#8a0f1d]">
-          <img src="/icons/exp.png" alt="Export" className="w-4 h-4" />
+          <Image src="/icons/exp.png" alt="Export" width={16} height={16} />
           Export
         </button>
 
         {/* Notifications and User */}
         <button className="flex items-center gap-1 ml-4">
-          <img src="/icons/bell.png" alt="Notifications" className="w-4 h-4" />
+          <Image src="/icons/bell.png" alt="Notifications" width={16} height={16} />
           <span className="text-sm text-[#1C1C1C]">Notifications</span>
         </button>
 
@@ -63,7 +63,7 @@ const Topbar = () => {
             alt="User"
             width={32}
             height={32}
-            className="rounded-full w-7 h-7"
+            className="rounded-full"
           />
           <span className="text-sm text-black">Jane F.</span>
           <ChevronDown className="text-black h-4 w-4" />
@@ -72,12 +72,10 @@ const Topbar = () => {
 
       {/* Mobile Buttons */}
       <div className="flex lg:hidden items-center gap-3 ml-auto">
-        {/* Mobile Search Icon */}
         <button onClick={() => setShowMobileSearch(!showMobileSearch)}>
           <Search className="h-5 w-5 text-[#6F0C15]" />
         </button>
 
-        {/* Hamburger Menu */}
         <button onClick={() => setShowMobileMenu(!showMobileMenu)}>
           <Menu className="h-6 w-6 text-[#6F0C15]" />
         </button>
@@ -101,15 +99,15 @@ const Topbar = () => {
       {showMobileMenu && (
         <div className="absolute top-full right-2 mt-2 w-60 bg-white shadow-lg rounded-xl z-30 p-4 space-y-3">
           <button className="flex items-center gap-2 text-sm text-[#6F0C15] w-full">
-            <img src="/icons/reset.png" className="w-4 h-4" />
+            <Image src="/icons/reset.png" alt="Reset Filters" width={16} height={16} />
             Reset Filters
           </button>
           <button className="flex items-center gap-2 text-sm text-[#6F0C15] w-full">
-            <img src="/icons/history.png" className="w-4 h-4" />
+            <Image src="/icons/history.png" alt="Export History" width={16} height={16} />
             Export History
           </button>
           <button className="flex items-center gap-2 text-sm bg-[#6F0C15] text-white px-3 py-1 rounded w-full justify-center">
-            <img src="/icons/exp.png" className="w-4 h-4" />
+            <Image src="/icons/exp.png" alt="Export" width={16} height={16} />
             Export
           </button>
         </div>

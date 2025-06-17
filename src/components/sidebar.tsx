@@ -4,7 +4,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import Image from "next/image";
 
-const Sidebar = ({ role }: { role: "admin" | "agent" }) => {
+const Sidebar = () => {
   const path = usePathname();
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
@@ -49,32 +49,29 @@ const Sidebar = ({ role }: { role: "admin" | "agent" }) => {
     }
   };
 
-
   const handleLogout = async () => {
-    const token = localStorage.getItem("token"); // Or wherever you store it
+    const token = localStorage.getItem("token");
 
     try {
       const response = await fetch("https://avetiumbackupservice.avetiumconsult.com/api/auth/logout/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // backend expects token here
+          Authorization: `Bearer ${token}`,
         },
       });
 
       if (response.ok) {
-        // Clear token and redirect to login
         localStorage.removeItem("token");
-        window.location.href = "/login"; // or use router.push("/login");
+        window.location.href = "/login";
       } else {
         const errorData = await response.json();
         alert(errorData.message || "Logout failed.");
       }
-    } catch (err) {
+    } catch (_) {
       alert("Network error during logout.");
     }
   };
-
 
   return (
     <>
@@ -104,11 +101,9 @@ const Sidebar = ({ role }: { role: "admin" | "agent" }) => {
         <nav className="flex flex-col font-medium gap-4 px-4 mt-10">
           {navItems.map((item) => {
             const isDashboard = item.name === "Dashboard";
-
-            const isActive =
-              isDashboard
-                ? path.includes("/dashboard/admin") || path.includes("/dashboard/agent")
-                : path === item.path;
+            const isActive = isDashboard
+              ? path.includes("/dashboard/admin") || path.includes("/dashboard/agent")
+              : path === item.path;
 
             const baseClass = `flex items-center gap-3 py-4 px-3 pl-8 rounded-lg transition ${isActive ? "bg-[#6F0C15] text-white font-bold" : "hover:bg-[#f4d6d8] text-[#6F0C15]"
               }`;
@@ -123,13 +118,12 @@ const Sidebar = ({ role }: { role: "admin" | "agent" }) => {
                 className={baseClass}
               >
                 <Image
-                  src={isActive ? "/icons/dashboard.png" : "/icons/dashboard.png"}
+                  src={item.icon}
                   alt={`${item.name} icon`}
                   width={20}
                   height={20}
                   className="object-contain"
                 />
-
                 {item.name}
               </button>
             ) : (
@@ -157,10 +151,15 @@ const Sidebar = ({ role }: { role: "admin" | "agent" }) => {
             onClick={handleLogout}
             className="w-full flex items-center justify-center gap-2 bg-[#6F0C154D] text-[#6F0C15] py-2 hover:text-white transition cursor-pointer"
           >
-            <img src="/icons/logout.png" alt="Logout icon" className="w-4 h-4" />
+            <Image
+              src="/icons/logout.png"
+              alt="Logout icon"
+              width={16}
+              height={16}
+              className="object-contain"
+            />
             Logout
           </button>
-
         </div>
       </aside>
     </>

@@ -6,13 +6,11 @@ import { Eye, EyeOff } from "lucide-react";
 import BackSign from '@/components/BacksignHeader/BacksignHeader';
 
 export default function SignupPage() {
-  // Hooks and state management
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // Form state
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -28,7 +26,6 @@ export default function SignupPage() {
     agreeToTerms: false
   });
 
-  // Derived state
   const password = formData.password;
   const requirements = useMemo(() => [
     { label: "Must be at least 8 characters", valid: password.length >= 8 },
@@ -37,7 +34,6 @@ export default function SignupPage() {
     { label: "At least one special character (!@#$%^&*)", valid: /[!@#$%^&*]/.test(password) },
   ], [password]);
 
-  // Event handlers
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
     const isCheckbox = type === 'checkbox';
@@ -51,7 +47,6 @@ export default function SignupPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Validation
     const passwordValid = requirements.every(r => r.valid);
     if (!passwordValid) {
       alert("Password does not meet all requirements.");
@@ -67,7 +62,6 @@ export default function SignupPage() {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 10000);
 
-    // Prepare payload
     const payload = {
       first_name: formData.firstName,
       last_name: formData.lastName,
@@ -86,7 +80,6 @@ export default function SignupPage() {
       }
     };
 
-    // API call
     try {
       const response = await fetch('https://avetiumbackupservice.avetiumconsult.com/api/auth/register/', {
         method: 'POST',
@@ -103,8 +96,8 @@ export default function SignupPage() {
       } else {
         alert(JSON.stringify(data));
       }
-    } catch (error: any) {
-      if (error.name === 'AbortError') {
+    } catch (error: unknown) {
+      if (error instanceof DOMException && error.name === 'AbortError') {
         alert("Request timed out. Please check your connection.");
       } else {
         alert("Signup failed. Please try again.");
@@ -112,19 +105,16 @@ export default function SignupPage() {
     } finally {
       setLoading(false);
     }
-
   };
-
 
   return (
     <>
       <BackSign />
       <div className="min-h-screen flex flex-col px-8">
         <div className="min-h-screen flex flex-col px-8 py-6 max-w-2xl mx-auto">
-          <h1 className="text-3xl font-bold mb-6 text-center">Let's set you up!</h1>
+          <h1 className="text-3xl font-bold mb-6 text-center">Let&#39;s set you up!</h1>
 
           <form onSubmit={handleSubmit} className="space-y-6 bg-white p-6 rounded shadow">
-            {/* Name Fields */}
             <div className="flex gap-4">
               <input
                 name="firstName"
@@ -144,7 +134,6 @@ export default function SignupPage() {
               />
             </div>
 
-            {/* Contact Information */}
             <input
               name="email"
               type="email"
@@ -164,7 +153,6 @@ export default function SignupPage() {
               className="w-full border border-[#6F0C15] p-2 rounded"
             />
 
-            {/* Password Fields */}
             <div className="relative">
               <input
                 name="password"
@@ -204,7 +192,6 @@ export default function SignupPage() {
               className="w-full border border-[#6F0C15] p-2 rounded"
             />
 
-            {/* Company Information */}
             <input
               name="companyName"
               value={formData.companyName}
@@ -233,7 +220,6 @@ export default function SignupPage() {
               />
             </div>
 
-            {/* Location Information */}
             <div className="flex gap-4">
               <input
                 name="country"
@@ -253,7 +239,6 @@ export default function SignupPage() {
               />
             </div>
 
-            {/* Terms Agreement */}
             <label className="flex items-center gap-2">
               <input
                 type="checkbox"
@@ -266,12 +251,10 @@ export default function SignupPage() {
               <span className="text-sm">I agree to the Terms and Privacy Policy</span>
             </label>
 
-            {/* Submit Button */}
             <button
               type="submit"
               disabled={loading}
-              className={`w-full py-2 rounded font-semibold ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#6F0C15] text-white'
-                }`}
+              className={`w-full py-2 rounded font-semibold ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#6F0C15] text-white'}`}
             >
               {loading ? 'Submitting...' : 'Next'}
             </button>

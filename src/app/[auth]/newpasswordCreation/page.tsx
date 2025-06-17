@@ -2,15 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import BackSign from '@/components/BacksignHeader/BacksignHeader';
 
 export default function NewPassword({ icon = "/icons/icon.png", iconImage = "/icons/iconImage.png" }) {
     const router = useRouter();
-    const searchParams = useSearchParams();
-
-    const token = searchParams.get('token');
 
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -50,9 +46,9 @@ export default function NewPassword({ icon = "/icons/icon.png", iconImage = "/ic
         }
 
         try {
-            // ... your API call here
-            router.push('/auth/resetSuccess'); 
-        } catch (err) {
+            // Add API call here to reset password
+            router.push('/auth/resetSuccess');
+        } catch {
             setMessage("Something went wrong");
         }
     };
@@ -60,11 +56,9 @@ export default function NewPassword({ icon = "/icons/icon.png", iconImage = "/ic
     return (
         <div className='h-screen px-8'>
             <BackSign />
-            <div className="flex flex-col items-center justify-center bg-white px-4 md:px-8  mt-6">
+            <div className="flex flex-col items-center justify-center bg-white px-4 md:px-8 mt-6">
                 <div className="flex flex-col md:flex-row gap-8 md:gap-16 items-center justify-center w-full max-w-6xl">
-                    {/* Form Card */}
                     <div className="w-full max-w-md border border-gray-300 rounded-lg shadow-md p-6 overflow-y-auto">
-                        {/* Logo */}
                         <div className="w-12 h-12 bg-gray-300 flex items-center justify-center rounded-full mx-auto mb-4">
                             <Image src={icon} alt="Avetium Technologies" width={24} height={24} priority />
                         </div>
@@ -73,7 +67,6 @@ export default function NewPassword({ icon = "/icons/icon.png", iconImage = "/ic
 
                         {message && <p className="text-red-500 text-sm mb-3">{message}</p>}
 
-                        {/* Password Field */}
                         <label className="block text-sm font-semibold text-gray-700 mb-1">New Password</label>
                         <input
                             type="password"
@@ -83,7 +76,6 @@ export default function NewPassword({ icon = "/icons/icon.png", iconImage = "/ic
                             onChange={(e) => setPassword(e.target.value)}
                         />
 
-                        {/* Requirements */}
                         <ul className="text-sm text-gray-600 mb-4 pl-5 list-disc space-y-1">
                             {requirements.map((req, idx) => (
                                 <li key={idx} className={req.valid ? "text-green-600" : "text-red-500"}>
@@ -92,7 +84,6 @@ export default function NewPassword({ icon = "/icons/icon.png", iconImage = "/ic
                             ))}
                         </ul>
 
-                        {/* Confirm Field */}
                         <label className="block text-sm font-semibold text-gray-700 mb-1">Confirm Password</label>
                         <input
                             type="password"
@@ -110,7 +101,6 @@ export default function NewPassword({ icon = "/icons/icon.png", iconImage = "/ic
                         </button>
                     </div>
 
-                    {/* Image (hidden on small screens) */}
                     <div className="hidden md:block">
                         <Image
                             src={iconImage}
@@ -123,5 +113,5 @@ export default function NewPassword({ icon = "/icons/icon.png", iconImage = "/ic
                 </div>
             </div>
         </div>
-    )
+    );
 }

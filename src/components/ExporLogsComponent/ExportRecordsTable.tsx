@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { ExportRecord } from "../../constants/types";
 
 export const ExportRecordsTable = () => {
@@ -62,7 +63,7 @@ export const ExportRecordsTable = () => {
               <td className="px-2 sm:px-4 py-3 whitespace-nowrap">
                 {item.status === "Completed" ? (
                   <button className="bg-[#6F0C15] text-white px-3 py-1 rounded flex items-center gap-1 text-xs sm:text-sm">
-                    <img src="/icons/Receive.png" className="w-3 h-3 text-white" alt="Download" />
+                    <Image src="/icons/Receive.png" alt="Download" width={12} height={12} />
                     Download
                   </button>
                 ) : (
@@ -70,7 +71,7 @@ export const ExportRecordsTable = () => {
                     className="bg-gray-200 text-gray-400 px-3 py-1 rounded flex items-center gap-1 text-xs sm:text-sm cursor-not-allowed"
                     disabled
                   >
-                    <img src="/icons/download.png" className="w-3 h-3" alt="Download" />
+                    <Image src="/icons/download.png" alt="Download" width={12} height={12} />
                     Download
                   </button>
                 )}
