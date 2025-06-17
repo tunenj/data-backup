@@ -6,8 +6,9 @@ import DefaultTopbar from "@/components/TopBar/Topbar"; // fallback topbar
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
-  topbar?: React.ReactNode; 
+  topbar?: React.ReactNode;
 }
+
 
 const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children, topbar }) => {
   return (

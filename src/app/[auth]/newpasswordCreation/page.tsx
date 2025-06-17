@@ -5,8 +5,10 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import BackSign from '@/components/BacksignHeader/BacksignHeader';
 
-export default function NewPassword({ icon = "/icons/icon.png", iconImage = "/icons/iconImage.png" }) {
+export default function NewPassword() {
     const router = useRouter();
+    const icon = "/icons/icon.png";
+    const iconImage = "/icons/iconImage.png";
 
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');

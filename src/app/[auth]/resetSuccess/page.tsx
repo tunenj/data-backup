@@ -1,16 +1,18 @@
-"use client";
+'use client';
 
 import BackSign from '@/components/BacksignHeader/BacksignHeader';
 import Image from 'next/image';
 
-export default function PasswordResetSuccess({ succession = "/icons/successicon.png" }) {
+export default function PasswordResetSuccess() {
+    const successIcon = "/icons/successicon.png";
+
     return (
         <div className='min-h-screen px-8'>
             <BackSign />
             <div className="flex items-center justify-center bg-white mt-6">
                 <div className="bg-white rounded-2xl text-2xl w-[40rem] h-[26rem] shadow-2xl p-8 max-w-md flex flex-col items-center">
                     <Image
-                        src={succession}
+                        src={successIcon}
                         alt="Success"
                         width={48}
                         height={48}
