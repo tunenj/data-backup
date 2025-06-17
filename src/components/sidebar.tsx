@@ -53,13 +53,16 @@ const Sidebar = () => {
     const token = localStorage.getItem("token");
 
     try {
-      const response = await fetch("https://avetiumbackupservice.avetiumconsult.com/api/auth/logout/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        "https://avetiumbackupservice.avetiumconsult.com/api/auth/logout/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (response.ok) {
         localStorage.removeItem("token");
@@ -68,7 +71,7 @@ const Sidebar = () => {
         const errorData = await response.json();
         alert(errorData.message || "Logout failed.");
       }
-    } catch (_) {
+    } catch {
       alert("Network error during logout.");
     }
   };
@@ -105,7 +108,9 @@ const Sidebar = () => {
               ? path.includes("/dashboard/admin") || path.includes("/dashboard/agent")
               : path === item.path;
 
-            const baseClass = `flex items-center gap-3 py-4 px-3 pl-8 rounded-lg transition ${isActive ? "bg-[#6F0C15] text-white font-bold" : "hover:bg-[#f4d6d8] text-[#6F0C15]"
+            const baseClass = `flex items-center gap-3 py-4 px-3 pl-8 rounded-lg transition ${isActive
+                ? "bg-[#6F0C15] text-white font-bold"
+                : "hover:bg-[#f4d6d8] text-[#6F0C15]"
               }`;
 
             return isDashboard ? (
