@@ -13,6 +13,7 @@ const VerificationCode: React.FC = () => {
     const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
     const searchParams = useSearchParams();
     const type = searchParams.get('type'); // "register" or "forgot"
+    const email = searchParams.get('email');
     const router = useRouter();
 
     const handleChange = (value: string, idx: number) => {
@@ -49,7 +50,7 @@ const VerificationCode: React.FC = () => {
             const res = await fetch(endpoint, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ otp }),
+                body: JSON.stringify({ otp, 'email': email }),
             });
 
             const data = await res.json();

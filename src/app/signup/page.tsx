@@ -90,9 +90,10 @@ export default function SignupPage() {
 
       clearTimeout(timeout);
       const data = await response.json();
+      console.log("Signup success:", data);
 
       if (response.ok) {
-        router.push(`/auth/otp-verification?email=${encodeURIComponent(formData.email)}`);
+        router.push(`/auth/otp-verification?email=${encodeURIComponent(formData.email)}&type=register`);
       } else {
         alert(JSON.stringify(data));
       }
