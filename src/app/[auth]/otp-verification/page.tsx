@@ -10,6 +10,7 @@ const CODE_LENGTH = 4;
 const VerificationCode: React.FC = () => {
     const [code, setCode] = useState<string[]>(Array(CODE_LENGTH).fill(''));
     const [error, setError] = useState<string | null>(null);
+    const [loading, setLoading] = useState(false);
     const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
     const searchParams = useSearchParams();
     const type = searchParams.get('type'); // "register" or "forgot"
@@ -36,36 +37,46 @@ const VerificationCode: React.FC = () => {
     const handleVerify = async () => {
         const otp = code.join('');
         let endpoint = '';
+        let payload: any = { otp };
 
         if (type === 'register') {
             endpoint = 'https://avetiumbackupservice.avetiumconsult.com/api/auth/otp/verify/';
         } else if (type === 'forgot') {
-            endpoint = 'https://avetiumbackupservice.avetiumconsult.com/api/auth/password/otp/verify/';
+            endpoint = 'https://avetiumbackupservice.avetiumconsult.com/api/auth/otp/reset-password/';
+            payload.email = email;
         } else {
             setError('Invalid flow type');
             return;
         }
 
+        console.log('Verifying OTP with:', { endpoint, payload });
+
         try {
+            setLoading(true);
             const res = await fetch(endpoint, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ otp, 'email': email }),
+                body: JSON.stringify(payload),
             });
 
             const data = await res.json();
+            console.log('Response status:', res.status);
+            console.log('Response body:', data);
 
             if (res.ok) {
                 if (type === 'register') {
                     router.push('/dashboard/admin');
                 } else if (type === 'forgot') {
-                    router.push('/auth/newpasswordCreation');
+                    router.push(`/auth/newpasswordCreation?email=${encodeURIComponent(email || '')}`);
                 }
             } else {
-                setError(data.message || 'OTP verification failed');
+                setError(data.message || JSON.stringify(data) || 'OTP verification failed');
             }
-        } catch {
+        } catch (err) {
+            console.error(err);
             setError('Something went wrong. Please try again.');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -95,16 +106,16 @@ const VerificationCode: React.FC = () => {
                             value={code[idx]}
                             onChange={(e) => handleChange(e.target.value, idx)}
                             onKeyDown={(e) => handleKeyDown(e, idx)}
-                            className="w-12 h-12 text-center text-2xl border-1 border-[#6F0C15] rounded-2xl focus:outline-[#6F0C15] focus:border-[#6F0C15]"
+                            className="w-12 h-12 text-center text-2xl border border-[#6F0C15] rounded-2xl focus:outline-[#6F0C15]"
                         />
                     ))}
                 </div>
                 <button
                     onClick={handleVerify}
                     className="w-full bg-[#6F0C15] text-white py-3 rounded-lg font-semibold mb-4 cursor-pointer"
-                    disabled={code.some((val) => !val)}
+                    disabled={loading || code.some((val) => !val)}
                 >
-                    Next
+                    {loading ? 'Verifying...' : 'Next'}
                 </button>
                 {error && (
                     <p className="text-red-500 text-center text-sm mb-4">{error}</p>

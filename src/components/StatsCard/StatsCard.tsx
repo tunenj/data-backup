@@ -15,7 +15,7 @@ export default function StatsCard({ title, value, subtext, footer, active }: Sta
   return (
     <div
       className={`flex-1 rounded-xl p-4 shadow-sm border transition-colors duration-200 
-        ${active ? 'bg-[#6F0C15] text-white' : 'bg-white border-[#6F0C15] border-2 text-[#6F0C15] lg:mt-6'}`}
+        ${active ? 'bg-[#6F0C15] text-white lg:mt-6' : 'bg-white border-[#6F0C15] border-2 text-[#6F0C15] lg:mt-6'}`}
     >
       <div className="flex justify-between items-start">
         <div>
@@ -26,7 +26,7 @@ export default function StatsCard({ title, value, subtext, footer, active }: Sta
       </div>
 
       {/* Placeholder for chart */}
-      <div className="h-[54.84px] my-3 w-full rounded bg-white text-[#6F0C15] relative">
+      <div className="h-[54.84px] my-3 w-full rounded text-[#6F0C15] relative">
         <Image
           src={active ? "/icons/fill.png" : "/icons/fill2.png"}
           alt="Chart"

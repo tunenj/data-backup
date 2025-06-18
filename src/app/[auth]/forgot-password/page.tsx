@@ -28,7 +28,8 @@ export default function ForgotPassword() {
       const data = await res.json();
 
       if (res.ok) {
-        router.push("/auth/otp-verification");
+        // ✅ Pass type=forgot and email to the OTP page
+        router.push(`/auth/otp-verification?type=forgot&email=${encodeURIComponent(email)}`);
       } else {
         setError(data.message || "Something went wrong. Please try again.");
       }
