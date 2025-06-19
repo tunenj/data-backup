@@ -113,9 +113,9 @@ export default function SignupPage() {
       <BackSign />
       <div className="bg-white min-h-screen flex flex-col px-8">
         <div className="min-h-screen flex flex-col px-8 py-6 max-w-2xl mx-auto">
-          <h1 className="text-3xl font-bold mb-6 text-center">Let&#39;s set you up!</h1>
+          <h1 className="text-3xl font-bold mb-6 text-center sm:text-black">Let&#39;s set you up!</h1>
 
-          <form onSubmit={handleSubmit} className="space-y-6 bg-white p-6 rounded shadow">
+          <form onSubmit={handleSubmit} className="space-y-6 bg-white sm:text-gray-500 p-6 rounded shadow">
             <div className="flex gap-4">
               <input
                 name="firstName"
