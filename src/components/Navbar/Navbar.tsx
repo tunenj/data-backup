@@ -122,7 +122,7 @@ export default function Navbar() {
 
         {/* Mobile Menu Dropdown */}
         {menuOpen && (
-          <div className="md:hidden absolute top-full left-0 w-full bg-black text-white px-4 py-6 z-40">
+          <div className="md:hidden absolute top-full left-0 w-full bg-[#b2b6b6] text-white px-4 py-6 z-40">
             <div className="flex flex-col space-y-4">
               {navLinks.map((link, index) => (
                 <Link

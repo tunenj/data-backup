@@ -1,7 +1,9 @@
 import React from 'react';
+import { useState } from 'react';
 import { User } from '../../constants/user';
 import UserRow from './UserRow';
 import Pagination from '../Pagination/Pagination';
+import UserManagementModal from './UserManagementModal/UserManagementModal';
 
 interface Props {
   users: User[];
@@ -9,16 +11,28 @@ interface Props {
 
 const UserTable: React.FC<Props> = ({ users }) => {
 
-   const totalExports = 30;
-   const itemsPerPage = 10;
+  const totalExports = 30;
+  const itemsPerPage = 10;
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <div className="bg-white shadow rounded-lg p-4 overflow-x-auto">
       <div className="flex justify-between items-center mb-4 min-w-full">
         <h2 className="font-semibold text-[20px] sm:text-[24px] leading-[20px]">User Management</h2>
-        <button className="bg-[#6F0C15] text-white text-sm sm:text-base px-3 py-2 rounded-md whitespace-nowrap">
+        <button className="bg-[#6F0C15] text-white text-sm sm:text-base px-3 py-2 rounded-md whitespace-nowrap cursor-pointer"
+          onClick={openModal}
+        >
           + Add New User
         </button>
+        {isModalOpen && <UserManagementModal closeModal={closeModal} />}
       </div>
 
       <div className="bg-[#EFE4E5] overflow-x-auto">

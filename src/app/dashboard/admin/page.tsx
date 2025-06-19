@@ -6,6 +6,7 @@ import DashboardStats from "@/components/DashboardStats/DashboardStats";
 import RecentActivity from "@/components/RecentActivity/RecentActivity";
 import StorageTrendsSection from "@/components/StorageTrendsSection/StorageTrendsSection";
 import Tabs from "@/components/Tabs/Tabs";
+import CallLogTable from "@/components/CallLogTable/CallLogTable";
 
 const AdminDashboardPage = () => {
   return (
@@ -53,6 +54,7 @@ const AdminDashboardPage = () => {
       </div>
       <DashboardStats />
       <StorageTrendsSection />
+      <CallLogTable />
       <RecentActivity />
     </DashboardLayout>
   );

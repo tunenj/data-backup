@@ -10,10 +10,8 @@ const CODE_LENGTH = 4;
 const VerificationCode: React.FC = () => {
     const [code, setCode] = useState<string[]>(Array(CODE_LENGTH).fill(''));
     const [error, setError] = useState<string | null>(null);
-    const [loading, setLoading] = useState(false);
     const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
     const searchParams = useSearchParams();
-    const type = searchParams.get('type'); // "register" or "forgot"
     const email = searchParams.get('email');
     const router = useRouter();
 
@@ -22,7 +20,6 @@ const VerificationCode: React.FC = () => {
         const newCode = [...code];
         newCode[idx] = value;
         setCode(newCode);
-
         if (value && idx < CODE_LENGTH - 1) {
             inputsRef.current[idx + 1]?.focus();
         }
@@ -34,72 +31,40 @@ const VerificationCode: React.FC = () => {
         }
     };
 
-    const handleVerify = async () => {
+    const handleNext = () => {
         const otp = code.join('');
-        let endpoint = '';
-        let payload: any = { otp };
-
-        if (type === 'register') {
-            endpoint = 'https://avetiumbackupservice.avetiumconsult.com/api/auth/otp/verify/';
-        } else if (type === 'forgot') {
-            endpoint = 'https://avetiumbackupservice.avetiumconsult.com/api/auth/otp/reset-password/';
-            payload.email = email;
-        } else {
-            setError('Invalid flow type');
+        if (code.some((digit) => digit === '')) {
+            setError('Please complete the OTP');
             return;
         }
 
-        console.log('Verifying OTP with:', { endpoint, payload });
-
-        try {
-            setLoading(true);
-            const res = await fetch(endpoint, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload),
-            });
-
-            const data = await res.json();
-            console.log('Response status:', res.status);
-            console.log('Response body:', data);
-
-            if (res.ok) {
-                if (type === 'register') {
-                    router.push('/dashboard/admin');
-                } else if (type === 'forgot') {
-                    router.push(`/auth/newpasswordCreation?email=${encodeURIComponent(email || '')}`);
-                }
-            } else {
-                setError(data.message || JSON.stringify(data) || 'OTP verification failed');
-            }
-        } catch (err) {
-            console.error(err);
-            setError('Something went wrong. Please try again.');
-        } finally {
-            setLoading(false);
+        if (!email) {
+            setError('Missing email');
+            return;
         }
+
+        // ✅ Navigate to password page with email and otp
+        router.push(`/auth/newpasswordCreation?email=${encodeURIComponent(email)}&otp=${otp}`);
     };
 
     return (
         <div className="px-8">
             <BackSign />
             <div className="max-w-md mx-auto p-8 bg-white rounded-2xl shadow-2xl mt-4">
-                <Link href={type === 'register' ? '/signup' : '/auth/forgot-password'}>
+                <Link href="/auth/forgot-password">
                     <button className="text-sm mb-4 flex items-center text-[#6F0C15] cursor-pointer">
                         <span className="mr-2">&larr;</span> Back
                     </button>
                 </Link>
                 <h2 className="text-xl font-semibold text-center mb-2 text-[#6F0C15]">Verification Code</h2>
                 <p className="text-gray-500 text-center mb-6 text-sm">
-                    We have sent the verification code to your email address
+                    We have sent a verification code to your email address.
                 </p>
                 <div className="flex justify-center gap-4 mb-6">
                     {Array.from({ length: CODE_LENGTH }).map((_, idx) => (
                         <input
                             key={idx}
-                            ref={(el) => {
-                                inputsRef.current[idx] = el;
-                            }}
+                            ref={(el) => { (inputsRef.current[idx] = el) }}
                             type="text"
                             inputMode="numeric"
                             maxLength={1}
@@ -111,11 +76,11 @@ const VerificationCode: React.FC = () => {
                     ))}
                 </div>
                 <button
-                    onClick={handleVerify}
+                    onClick={handleNext}
                     className="w-full bg-[#6F0C15] text-white py-3 rounded-lg font-semibold mb-4 cursor-pointer"
-                    disabled={loading || code.some((val) => !val)}
+                    disabled={code.some((val) => !val)}
                 >
-                    {loading ? 'Verifying...' : 'Next'}
+                    Next
                 </button>
                 {error && (
                     <p className="text-red-500 text-center text-sm mb-4">{error}</p>

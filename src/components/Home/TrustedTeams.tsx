@@ -1,5 +1,5 @@
 import Image from "next/image";
-import logomark from '../../../public/icons/logomark.png'; // Adjust path if needed
+import logomark from '../../../public/icons/logomark.png';
 import { colors } from "@/utils/colors";
 
 const teams = [
@@ -15,7 +15,7 @@ const teams = [
 
 export default function TrustedTeams() {
   return (
-    <div className="text-center mt-12">
+    <div className="bg-white text-center mt-12">
       <div
         className="font-semibold mb-2 text-xl md:text-3xl"
         style={{ color: colors.primary }}

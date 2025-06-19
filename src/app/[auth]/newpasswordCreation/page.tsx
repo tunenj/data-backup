@@ -2,17 +2,21 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import BackSign from '@/components/BacksignHeader/BacksignHeader';
 
 export default function NewPassword() {
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const email = searchParams.get('email');
+    const otp = searchParams.get('otp');
+
     const icon = "/icons/icon.png";
     const iconImage = "/icons/iconImage.png";
 
     const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
     const [message, setMessage] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const [requirements, setRequirements] = useState([
         { label: 'At least 8 characters', valid: false },
@@ -34,24 +38,38 @@ export default function NewPassword() {
     }, [password]);
 
     const handleReset = async () => {
-        if (!password || !confirmPassword) {
-            return setMessage("Please fill all fields");
+        if (!password || !email || !otp) {
+            return setMessage("Missing information.");
         }
 
         const passwordValid = requirements.every(req => req.valid);
         if (!passwordValid) {
-            return setMessage("Password does not meet all requirements");
-        }
-
-        if (password !== confirmPassword) {
-            return setMessage("Passwords do not match");
+            return setMessage("Password does not meet all requirements.");
         }
 
         try {
-            // Add API call here to reset password
-            router.push('/auth/resetSuccess');
+            setLoading(true);
+            const res = await fetch('https://avetiumbackupservice.avetiumconsult.com/api/auth/otp/reset-password/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email,
+                    otp,
+                    new_password: password,
+                }),
+            });
+
+            const data = await res.json();
+
+            if (res.ok) {
+                router.push('/auth/resetSuccess');
+            } else {
+                setMessage(data.message || "Password reset failed.");
+            }
         } catch {
-            setMessage("Something went wrong");
+            setMessage("Something went wrong.");
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -86,20 +104,12 @@ export default function NewPassword() {
                             ))}
                         </ul>
 
-                        <label className="block text-sm font-semibold text-gray-700 mb-1">Confirm Password</label>
-                        <input
-                            type="password"
-                            placeholder="Confirm new password"
-                            className="w-full mb-4 p-2 border rounded-xl border-[#6F0C15]"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                        />
-
                         <button
                             onClick={handleReset}
+                            disabled={loading}
                             className="w-full bg-[#6F0C15] text-white py-2 rounded-xl hover:bg-[#5a0a11] cursor-pointer"
                         >
-                            Reset Password
+                            {loading ? 'Resetting...' : 'Reset Password'}
                         </button>
                     </div>
 

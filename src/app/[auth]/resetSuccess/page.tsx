@@ -24,7 +24,7 @@ export default function PasswordResetSuccess() {
                         Click Below to log in
                     </p>
                     <button
-                        onClick={() => window.location.href = '/AdminLogin'}
+                        onClick={() => window.location.href = '/login/AdminLogin'}
                         className="bg-[#6F0C15] text-white font-[Poppins] py-4 px-24 font-medium text-[20px] rounded-xl leading-[16px] tracking-[0em] cursor-pointer"
                     >
                         Continue to Login

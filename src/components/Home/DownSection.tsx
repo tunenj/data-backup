@@ -2,7 +2,7 @@ import { colors } from "@/utils/colors";
 
 export default function DowntimeSection() {
   return (
-    <div className="text-right px-4 sm:px-8 md:px-12 lg:px-20 md:p-6 w-full h-100 md:w-[45rem] md:h-[36rem]">
+    <div className="text-right px-4 sm:px-8 mt-4 md:px-12 lg:px-20 md:p-6 w-full h-100 md:w-[45rem] md:h-[36rem]">
       <div
         className="font-poppins font-bold text-[28px] sm:text-[32px] lg:mb-6 md:text-[40px] lg:text-[48px] leading-[100%]"
         style={{ color: colors.primary }}
@@ -25,9 +25,9 @@ export default function DowntimeSection() {
         or a third-party cloud, CrashPlan monitors it all and gives you peace of mind.
       </div>
 
-      <div className="my-10 md:my-20">
+      <div className="my-4 md:my-20">
         <button
-          className="bg-[#6F0C15] hover:bg-[#8a0f1d] text-white font-semibold lg:px-40  rounded-md sm:px-12 md:px-20 py-3 transition duration-200"
+          className="bg-[#6F0C15] hover:bg-[#8a0f1d] text-white font-semibold px-20 lg:px-40  rounded-md md:px-20 py-3 transition duration-200"
         >
           Learn More
         </button>
