@@ -122,7 +122,7 @@ export default function Navbar() {
 
         {/* Mobile Menu Dropdown */}
         {menuOpen && (
-          <div className="md:hidden absolute top-full left-0 w-full bg-[#b2b6b6] text-white px-4 py-6 z-40">
+          <div className="md:hidden absolute top-full left-0 w-full bg-white text-white px-4 py-6 z-40">
             <div className="flex flex-col space-y-4">
               {navLinks.map((link, index) => (
                 <Link
@@ -139,7 +139,7 @@ export default function Navbar() {
               <Link href="/signup" onClick={() => setMenuOpen(false)}>
                 <button
                   style={{ borderColor: colors.primary }}
-                  className="bg-transparent text-white font-medium border-2 px-4 py-2 rounded-md"
+                  className="bg-transparent text-[#6F0C15] font-medium border-2 px-4 py-2 rounded-md"
                 >
                   Register
                 </button>
@@ -150,7 +150,7 @@ export default function Navbar() {
                 <Link href="/login/AgentLogin" onClick={() => setMenuOpen(false)}>
                   <button
                     style={{ backgroundColor: colors.primary }}
-                    className="text-white font-medium px-4 py-2 rounded-md"
+                    className="text-white font-medium px-7 py-2 rounded-md"
                   >
                     Agent
                   </button>
@@ -158,7 +158,7 @@ export default function Navbar() {
                 <Link href="/login/AdminLogin" onClick={() => setMenuOpen(false)}>
                   <button
                     style={{ backgroundColor: colors.primary }}
-                    className="text-white font-medium px-4 py-2 rounded-md"
+                    className="text-white font-medium px-7 py-2 rounded-md"
                   >
                     Admin
                   </button>
