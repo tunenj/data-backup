@@ -1,36 +1,17 @@
 'use client';
 
 import Image from 'next/image';
-import { Search, ChevronDown, Menu, X } from 'lucide-react';
+import { Search, ChevronDown, Menu } from 'lucide-react';
 import { useState } from 'react';
 import Link from 'next/link';
-import CustomAudioPlayer from '../CustomAudioPlayer/CustomAudioPlayer';
+import { X } from 'lucide-react'
+import ProfileMenu from '../ProfileMenu/ProfileMenu';
 
 const Topbar = () => {
   const [showMobileSearch, setShowMobileSearch] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const closeModal = () => setIsModalOpen(false);
-
-  const icons = [
-    "/icons/Icon-Wrapper.png",
-    "/icons/Wrapper.png",
-    "/icons/upload.png",
-    "/icons/share.png",
-  ];
-
-  const infoItems = [
-    { icon: "/icons/modalIcons/call.png", label: "Call ID:", value: "#AV9801" },
-    { icon: "/icons/modalIcons/agent.png", label: "Agent:", value: "John Doe" },
-    { icon: "/icons/modalIcons/phone.png", label: "Phone:", value: "(+234) 80-1234-567-89" },
-    { icon: "/icons/modalIcons/campaign.png", label: "Campaign:", value: "Email" },
-    { icon: "/icons/modalIcons/queue.png", label: "Queue:", value: "Reservation" },
-    { icon: "/icons/modalIcons/date.png", label: "Date:", value: "2025-05-01 09:12" },
-    { icon: "/icons/modalIcons/duration.png", label: "Duration:", value: "10:04:0" },
-    { icon: "/icons/modalIcons/deposition.png", label: "Disposition:", value: "Resolved" },
-    { icon: "/icons/modalIcons/hangup.png", label: "Hangup By:", value: "Agent" },
-  ];
 
   interface TagProps {
     label: string;
@@ -49,7 +30,7 @@ const Topbar = () => {
   };
 
   return (
-    <header className="w-full h-[96px] bg-[#EFE4E5] shadow px-4 py-2 flex items-center justify-between relative z-20">
+    <header className="w-full h-16 bg-[#EFE4E5] shadow px-4 py-2 flex items-center justify-between relative z-20">
       {/* Left: Logo */}
       <Link href="/" className="flex items-center ml-8">
         <Image
@@ -62,7 +43,7 @@ const Topbar = () => {
       </Link>
 
       {/* Desktop Search */}
-      <div className="hidden lg:flex items-center flex-1 max-w-[400px] mx-4">
+      <div className="hidden lg:flex items-center lg:ml-16 flex-1 max-w-[400px] mx-4">
         <div className="relative w-full">
           <input
             type="text"
@@ -95,7 +76,6 @@ const Topbar = () => {
           <Image src="/icons/bell.png" alt="Notifications" width={16} height={16} />
           <span className="text-sm text-[#1C1C1C]">Notifications</span>
         </button>
-
         <div
           className="flex items-center gap-1 relative cursor-pointer"
           onClick={() => setIsModalOpen(true)}
@@ -155,103 +135,19 @@ const Topbar = () => {
         </div>
       )}
 
-      {/* Modal */}
       {isModalOpen && (
-        <div className="absolute right-0 top-full mt-2 w-[392] max-w-md bg-[#EFE4E5] rounded-lg border border-[#d4a2aa] z-50">
-          <div className="bg-[#EFE4E5] rounded-lg border border-[#d4a2aa] w-full max-h-[80vh] overflow-y-auto">
-            {/* Header */}
-            <div className="border-b border-[#d4a2aa] px-2 flex justify-end items-center">
-              <button
-                onClick={closeModal}
-                className="text-[#6F0C15] hover:text-[#8a0f1d] text-2xl"
-              >
-                ×
-              </button>
-            </div>
-
-            {/* Content */}
-            <div className="p-4 space-y-6 text-[#1C1C1C]">
-              {/* Icons Section */}
-              <div className="flex flex-col items-center gap-3">
-                {/* Top Image */}
-                <Image
-                  src="/icons/Picture-Container.png"
-                  alt=""
-                  width={80}
-                  height={80}
-                />
-
-                {/* Bottom Row of 3 Images */}
-                <div className="flex gap-3">
-                  {icons.map((src, index) => (
-                    <Image
-                      key={index}
-                      src={src}
-                      alt=""
-                      width={20}
-                      height={20}
-                    />
-                  ))}
-                </div>
-                <div className="w-full h-[1px] mt-3 bg-gray-400"></div>
-              </div>
-
-              {/* Details Section */}
-              <div className="space-y-3 text-sm">
-                <div className="space-y-2">
-                  {infoItems.map((item, index) => (
-                    <div key={index} className="flex justify-between items-center">
-                      <div className="flex items-center gap-1">
-                        <Image src={item.icon} alt={item.label} width={18} height={18} />
-                        <span className="text-gray-400">{item.label}</span>
-                      </div>
-                      <span>{item.value}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className='font-medium text-[14px] leading-[20px] '>
-                <p className='mb-2'>Tags
-                  <span className='ml-3'>1</span>
-                </p>
-                <p>Add Note
-                  <span className='ml-3'>+</span>
-                </p>
-                <input className="w-72 h-[40px] rounded-[15px] border-1 border-[#8F8F8F33] mt-4" type="text" />
-              </div>
-            </div>
-            <div className='rounded-[15px] p-4 space-y-[10px]'>
-              <div className="flex gap-6 p-3 rounded-md">
-                <div className="bg-[#C39B9F] text-white px-4 py-1 rounded-full text-sm font-medium shadow flex items-center gap-2">
-                  <span>Quality Review</span>
-                  <button className="hover:text-gray-200 text-xs">×</button>
-                </div>
-                <div className="bg-[#C39B9F] text-white px-4 py-1 rounded-full text-sm font-medium shadow flex items-center gap-2">
-                  <span>Follow Up</span>
-                  <button className="hover:text-gray-200 text-xs">×</button>
-                </div>
-              </div>
-              <div className="flex gap-[10px] px-3">
-                <div className="bg-[#C39B9F] text-white px-4 py-1 rounded-full text-sm font-medium shadow flex items-center gap-2">
-                  <span>Quality Review</span>
-                  <button className="hover:text-gray-200 text-xs">×</button>
-                </div>
-              </div>
-            </div>
-
-            <div className='p-4'>
-              <div className='bg-[#EFE4E5] shadow-xl rounded-xl p-3'>
-                <div className="flex items-center justify-between w-full">
-                  <p className='text-gray-400'>Call Recording 2025-10-5</p>
-                  <Image src="/icons/modalIcons/flag-outline.png" alt="" width={12} height={14} />
-                </div>
-                <CustomAudioPlayer />
-              </div>
-            </div>
+        <div className="absolute right-0 top-[100%] max-w-md rounded-2xl border border-[#d4a2aa] mx-6">
+          <div className="border-b border-white relative">
+            <ProfileMenu />
+            <button
+              onClick={closeModal}
+              className="text-[#6F0C15] text-lg absolute top-0 right-0 px-5 pt-2"
+            >
+              x
+            </button>
           </div>
         </div>
-      )
-      }
+      )}
     </header >
   );
 };

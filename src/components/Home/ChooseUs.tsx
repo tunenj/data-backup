@@ -11,7 +11,7 @@ export default function FeatureTabs() {
   };
 
   return (
-    <div className="bg-white flex flex-col items-center lg:mb-8 gap-6 px-4 sm:px-2">
+    <div className="bg-white flex flex-col items-center pt-4 lg:mb-8 gap-6 px-4 sm:px-2">
       <h1
         className="font-poppins font-bold text-[32px] sm:text-[40px] md:text-[48px] leading-[100%] tracking-normal text-center"
         style={{ color: colors.primary }}
@@ -21,7 +21,7 @@ export default function FeatureTabs() {
 
       <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 md:gap-20 flex-wrap">
         <button
-          className={`font-normal py-3 px-10 sm:px-14 rounded-md shadow-sm ${activeButton === "instantRecovery" ? "text-white" : "text-[#6F0C15] "
+          className={`font-normal py-3 px-10 sm:px-14 rounded-2xl shadow-sm ${activeButton === "instantRecovery" ? "text-white" : "text-[#6F0C15] "
             }`}
           style={{
             backgroundColor:
@@ -34,7 +34,7 @@ export default function FeatureTabs() {
         </button>
 
         <button
-          className={`font-normal py-3 px-10 sm:px-6 rounded-md text-center ${activeButton === "smartAutomation" ? "text-white" : "text-[#6F0C15]"
+          className={`font-normal py-3 px-16 sm:px-6 rounded-2xl text-center ${activeButton === "smartAutomation" ? "text-white" : "text-[#6F0C15]"
             }`}
           style={{
             backgroundColor:
@@ -47,7 +47,7 @@ export default function FeatureTabs() {
         </button>
 
         <button
-          className={`font-normal py-3 px-10 sm:px-6 rounded-md text-center ${activeButton === "endToEndEncryption" ? "text-white" : "text-[#6F0C15] "
+          className={`font-normal py-3 px-18 sm:px-6 rounded-2xl text-center ${activeButton === "endToEndEncryption" ? "text-white" : "text-[#6F0C15] "
             }`}
           style={{
             backgroundColor:

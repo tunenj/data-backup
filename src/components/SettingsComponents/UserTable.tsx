@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { User } from '../../constants/user';
 import UserRow from './UserRow';
 import Pagination from '../Pagination/Pagination';
-import UserManagementModal from './UserManagementModal/UserManagementModal';
+import UserManagementModal from '../UserManagementModal/UserManagementModal';
 
 interface Props {
   users: User[];

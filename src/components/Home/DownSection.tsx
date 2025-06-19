@@ -27,7 +27,7 @@ export default function DowntimeSection() {
 
       <div className="my-4 md:my-20">
         <button
-          className="bg-[#6F0C15] hover:bg-[#8a0f1d] text-white font-semibold px-20 lg:px-40  rounded-md md:px-20 py-3 transition duration-200"
+          className="bg-[#6F0C15] hover:bg-[#8a0f1d] text-white font-semibold px-20 lg:px-40  rounded-2xl md:px-20 py-3 transition duration-200"
         >
           Learn More
         </button>
