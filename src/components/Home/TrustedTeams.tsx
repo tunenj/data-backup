@@ -15,7 +15,7 @@ const teams = [
 
 export default function TrustedTeams() {
   return (
-    <div className="bg-white text-center mt-12">
+    <div className="bg-white text-center lg:mt-12">
       <div
         className="font-semibold mb-2 text-xl md:text-3xl"
         style={{ color: colors.primary }}
@@ -24,7 +24,7 @@ export default function TrustedTeams() {
       </div>
 
       <div
-        className="flex flex-col items-center font-medium text-base px-6 sm:px-10 mt-10 mb-14"
+        className="flex flex-col items-center font-medium text-base px-6 sm:px-10 mt-10 lg:mb-14"
         style={{ color: colors.primary }}
       >
         {/* Top row: 3 cols on mobile, 5 on desktop */}

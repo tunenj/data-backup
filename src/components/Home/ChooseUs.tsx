@@ -11,7 +11,7 @@ export default function FeatureTabs() {
   };
 
   return (
-    <div className="bg-white flex flex-col items-center mb-8 gap-6 px-4 sm:px-2">
+    <div className="bg-white flex flex-col items-center lg:mb-8 gap-6 px-4 sm:px-2">
       <h1
         className="font-poppins font-bold text-[32px] sm:text-[40px] md:text-[48px] leading-[100%] tracking-normal text-center"
         style={{ color: colors.primary }}
