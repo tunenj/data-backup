@@ -111,9 +111,9 @@ export default function SignupPage() {
   return (
     <>
       <BackSign />
-      <div className="bg-white min-h-screen flex flex-col sm:text-gray-500 px-8">
+      <div className="bg-white min-h-screen flex flex-col px-3">
         <div className="min-h-screen flex flex-col px-8 py-6 max-w-2xl mx-auto">
-          <h1 className="text-3xl font-bold mb-6 text-center">Let&#39;s set you up!</h1>
+          <h1 className="text-3xl font-bold mb-6 sm:text-black text-center">Let&#39;s set you up!</h1>
 
           <form onSubmit={handleSubmit} className="space-y-6 bg-white  p-6 rounded shadow">
             <div className="flex gap-4">
@@ -123,7 +123,7 @@ export default function SignupPage() {
                 onChange={handleChange}
                 required
                 placeholder="First Name"
-                className="w-1/2 border border-[#6F0C15] p-2 rounded"
+                className="w-1/2 border border-[#6F0C15] p-2 sm:text-black rounded"
               />
               <input
                 name="lastName"
@@ -131,7 +131,7 @@ export default function SignupPage() {
                 onChange={handleChange}
                 required
                 placeholder="Last Name"
-                className="w-1/2 border border-[#6F0C15] p-2 rounded"
+                className="w-1/2 border border-[#6F0C15] sm:text-black p-2 rounded"
               />
             </div>
 
@@ -142,7 +142,7 @@ export default function SignupPage() {
               onChange={handleChange}
               required
               placeholder="Business Email"
-              className="w-full border border-[#6F0C15] p-2 rounded"
+              className="w-full border border-[#6F0C15] sm:text-black p-2 rounded"
             />
             <input
               name="phone"
@@ -151,7 +151,7 @@ export default function SignupPage() {
               onChange={handleChange}
               required
               placeholder="Phone Number"
-              className="w-full border border-[#6F0C15] p-2 rounded"
+              className="w-full border border-[#6F0C15] sm:text-black p-2 rounded"
             />
 
             <div className="relative">
@@ -164,7 +164,7 @@ export default function SignupPage() {
                 placeholder="Password"
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
-                className="w-full border border-[#6F0C15] p-2 rounded pr-10"
+                className="w-full border border-[#6F0C15] sm:text-black p-2 rounded pr-10"
               />
               <span
                 onClick={() => setShowPassword(!showPassword)}
