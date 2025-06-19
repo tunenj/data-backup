@@ -17,7 +17,7 @@ export default function TrustedTeams() {
   return (
     <div className="bg-white text-center lg:mt-12">
       <div
-        className="font-semibold mt-1 mb-2 text-xl md:text-3xl"
+        className="font-semibold pt-1 mb-2 text-xl md:text-3xl"
         style={{ color: colors.primary }}
       >
         Trusted by forward-thinking teams at:
