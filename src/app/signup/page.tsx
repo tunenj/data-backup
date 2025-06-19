@@ -111,7 +111,7 @@ export default function SignupPage() {
   return (
     <>
       <BackSign />
-      <div className="min-h-screen flex flex-col px-8">
+      <div className="bg-white min-h-screen flex flex-col px-8">
         <div className="min-h-screen flex flex-col px-8 py-6 max-w-2xl mx-auto">
           <h1 className="text-3xl font-bold mb-6 text-center">Let&#39;s set you up!</h1>
 

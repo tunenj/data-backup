@@ -147,7 +147,7 @@ export default function Navbar() {
 
               {/* Sign in options (Mobile) */}
               <div className="flex flex-col space-y-2">
-                <Link href="/AgentLogin" onClick={() => setMenuOpen(false)}>
+                <Link href="/login/AgentLogin" onClick={() => setMenuOpen(false)}>
                   <button
                     style={{ backgroundColor: colors.primary }}
                     className="text-white font-medium px-4 py-2 rounded-md"
@@ -155,7 +155,7 @@ export default function Navbar() {
                     Agent
                   </button>
                 </Link>
-                <Link href="/AdminLogin" onClick={() => setMenuOpen(false)}>
+                <Link href="/login/AdminLogin" onClick={() => setMenuOpen(false)}>
                   <button
                     style={{ backgroundColor: colors.primary }}
                     className="text-white font-medium px-4 py-2 rounded-md"
