@@ -73,7 +73,7 @@ export default function AdminLogin() {
       <div className="flex flex-col md:flex-row flex-1 justify-between items-start px-4 md:px-9 pt-6 md:pt-8 gap-8">
         {/* Login Form */}
         <div className="w-full md:max-w-md lg:w-[45rem] h-[30rem] border border-gray-400 rounded-lg px-6">
-          <h2 className="text-center text-xl font-semibold mb-8 lg:mt-6">Admin Sign In</h2>
+          <h2 className="text-center text-xl font-semibold mb-8 sm:text-black lg:mt-6">Admin Sign In</h2>
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="email" className="block text-sm font-medium mb-1">E-mail</label>
@@ -84,7 +84,7 @@ export default function AdminLogin() {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="Enter your email"
-                className="w-full border border-[#6F0C15] rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#6F0C15] text-sm"
+                className="w-full border border-[#6F0C15] rounded-md px-3 placeholder-gray-60 py-2 focus:outline-none focus:ring-2 focus:ring-[#6F0C15] text-sm"
                 required
               />
             </div>
@@ -97,7 +97,7 @@ export default function AdminLogin() {
                 value={formData.password}
                 onChange={handleChange}
                 placeholder="Password"
-                className="w-full border border-[#6F0C15] rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#6F0C15] text-sm pr-10"
+                className="w-full border border-[#6F0C15] rounded-md px-3 placeholder-gray-60 py-2 focus:outline-none focus:ring-2 focus:ring-[#6F0C15] text-sm pr-10"
                 required
               />
               <span

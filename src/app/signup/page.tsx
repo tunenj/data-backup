@@ -123,7 +123,7 @@ export default function SignupPage() {
                 onChange={handleChange}
                 required
                 placeholder="First Name"
-                className="w-1/2 border border-[#6F0C15] p-2 sm:text-black rounded"
+                className="w-1/2 border border-[#6F0C15] p-2 placeholder-gray-60 rounded"
               />
               <input
                 name="lastName"
@@ -131,7 +131,7 @@ export default function SignupPage() {
                 onChange={handleChange}
                 required
                 placeholder="Last Name"
-                className="w-1/2 border border-[#6F0C15] sm:text-black p-2 rounded"
+                className="w-1/2 border border-[#6F0C15] placeholder-gray-60 p-2 rounded"
               />
             </div>
 
@@ -142,7 +142,7 @@ export default function SignupPage() {
               onChange={handleChange}
               required
               placeholder="Business Email"
-              className="w-full border border-[#6F0C15] sm:text-black p-2 rounded"
+              className="w-full border border-[#6F0C15] placeholder-gray-60 p-2 rounded"
             />
             <input
               name="phone"
@@ -151,7 +151,7 @@ export default function SignupPage() {
               onChange={handleChange}
               required
               placeholder="Phone Number"
-              className="w-full border border-[#6F0C15] sm:text-black p-2 rounded"
+              className="w-full border border-[#6F0C15] placeholder-gray-60 p-2 rounded"
             />
 
             <div className="relative">
@@ -164,7 +164,7 @@ export default function SignupPage() {
                 placeholder="Password"
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
-                className="w-full border border-[#6F0C15] sm:text-black p-2 rounded pr-10"
+                className="w-full border border-[#6F0C15] placeholder-gray-60 p-2 rounded pr-10"
               />
               <span
                 onClick={() => setShowPassword(!showPassword)}
