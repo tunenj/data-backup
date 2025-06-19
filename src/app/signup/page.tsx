@@ -115,7 +115,7 @@ export default function SignupPage() {
         <div className="min-h-screen flex flex-col px-8 py-6 max-w-2xl mx-auto">
           <h1 className="text-3xl font-bold mb-6 text-gray-600 text-center">Let&#39;s set you up!</h1>
 
-          <form onSubmit={handleSubmit} className="space-y-6 bg-white  p-6 rounded shadow">
+          <form onSubmit={handleSubmit} className="space-y-6 bg-white p-6 rounded shadow">
             <div className="flex gap-4">
               <input
                 name="firstName"
@@ -123,7 +123,7 @@ export default function SignupPage() {
                 onChange={handleChange}
                 required
                 placeholder="First Name"
-                className="w-1/2 border border-[#6F0C15] p-2 placeholder-gray-600 rounded"
+                className="w-1/2 border border-[#6F0C15] placeholder-gray-600 text-black p-2 rounded"
               />
               <input
                 name="lastName"
@@ -131,7 +131,7 @@ export default function SignupPage() {
                 onChange={handleChange}
                 required
                 placeholder="Last Name"
-                className="w-1/2 border border-[#6F0C15] placeholder-gray-600 p-2 rounded"
+                className="w-1/2 border border-[#6F0C15] placeholder-gray-600 text-black p-2 rounded"
               />
             </div>
 
@@ -142,7 +142,7 @@ export default function SignupPage() {
               onChange={handleChange}
               required
               placeholder="Business Email"
-              className="w-full border border-[#6F0C15] placeholder-gray-600 p-2 rounded"
+              className="w-full border border-[#6F0C15] placeholder-gray-600 text-black p-2 rounded"
             />
             <input
               name="phone"
@@ -151,7 +151,7 @@ export default function SignupPage() {
               onChange={handleChange}
               required
               placeholder="Phone Number"
-              className="w-full border border-[#6F0C15] placeholder-gray-600 p-2 rounded"
+              className="w-full border border-[#6F0C15] placeholder-gray-600 text-black p-2 rounded"
             />
 
             <div className="relative">
@@ -164,7 +164,7 @@ export default function SignupPage() {
                 placeholder="Password"
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
-                className="w-full border border-[#6F0C15] placeholder-gray-600 p-2 rounded pr-10"
+                className="w-full border border-[#6F0C15] placeholder-gray-600 text-black p-2 rounded pr-10"
               />
               <span
                 onClick={() => setShowPassword(!showPassword)}
@@ -190,7 +190,7 @@ export default function SignupPage() {
               onChange={handleChange}
               required
               placeholder="Confirm Password"
-              className="w-full border border-[#6F0C15] placeholder-gray-600 p-2 rounded"
+              className="w-full border border-[#6F0C15] placeholder-gray-600 text-black p-2 rounded"
             />
 
             <input
@@ -199,7 +199,7 @@ export default function SignupPage() {
               onChange={handleChange}
               required
               placeholder="Company Name"
-              className="w-full border border-[#6F0C15] placeholder-gray-600 p-2 rounded"
+              className="w-full border border-[#6F0C15] placeholder-gray-600 text-black p-2 rounded"
             />
 
             <div className="flex gap-4">
@@ -209,7 +209,7 @@ export default function SignupPage() {
                 onChange={handleChange}
                 required
                 placeholder="Job Title"
-                className="w-1/2 border border-[#6F0C15] placeholder-gray-600 p-2 rounded"
+                className="w-1/2 border border-[#6F0C15] placeholder-gray-600 text-black p-2 rounded"
               />
               <input
                 name="sector"
@@ -217,7 +217,7 @@ export default function SignupPage() {
                 onChange={handleChange}
                 required
                 placeholder="Sector (e.g. FinTech)"
-                className="w-1/2 border border-[#6F0C15] placeholder-gray-600 p-2 rounded"
+                className="w-1/2 border border-[#6F0C15] placeholder-gray-600 text-black p-2 rounded"
               />
             </div>
 
@@ -228,7 +228,7 @@ export default function SignupPage() {
                 onChange={handleChange}
                 required
                 placeholder="Country"
-                className="w-1/2 border border-[#6F0C15] placeholder-gray-600 p-2 rounded"
+                className="w-1/2 border border-[#6F0C15] placeholder-gray-600 text-black p-2 rounded"
               />
               <input
                 name="stateProvince"
@@ -236,7 +236,7 @@ export default function SignupPage() {
                 onChange={handleChange}
                 required
                 placeholder="State/Province"
-                className="w-1/2 border border-[#6F0C15] placeholder-gray-600 p-2 rounded"
+                className="w-1/2 border border-[#6F0C15] placeholder-gray-600 text-black p-2 rounded"
               />
             </div>
 
@@ -249,7 +249,7 @@ export default function SignupPage() {
                 required
                 className="h-4 w-4"
               />
-              <span className="text-sm">I agree to the Terms and Privacy Policy</span>
+              <span className="text-sm text-gray-500">I agree to the Terms and Privacy Policy</span>
             </label>
 
             <button
@@ -260,6 +260,7 @@ export default function SignupPage() {
               {loading ? 'Submitting...' : 'Next'}
             </button>
           </form>
+
         </div>
       </div>
     </>

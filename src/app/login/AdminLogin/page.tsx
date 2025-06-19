@@ -73,7 +73,7 @@ export default function AdminLogin() {
       <div className="flex flex-col md:flex-row flex-1 justify-between items-start px-4 md:px-9 pt-6 md:pt-8 gap-8">
         {/* Login Form */}
         <div className="w-full md:max-w-md lg:w-[45rem] h-[30rem] border border-gray-400 rounded-lg px-6">
-          <h2 className="text-center text-xl font-semibold mb-8 text-gray-600 lg:mt-6">Admin Sign In</h2>
+          <h2 className="text-center text-xl font-semibold mb-8 text-gray-600 lg:mt-6 pt-2">Admin Sign In</h2>
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="email" className="block text-sm text-gray-600 font-medium mb-1">E-mail</label>
@@ -109,8 +109,8 @@ export default function AdminLogin() {
             </div>
 
             <div className="flex items-center justify-between">
-              <label className="flex items-center text-sm">
-                <input type="checkbox" className="mr-2 text-gray-600 accent-[#6F0C15]" />
+              <label className="flex items-center text-sm text-gray-600">
+                <input type="checkbox" className="mr-2  accent-[#6F0C15]" />
                 Remember me?
               </label>
               <Link href="/auth/forgot-password" className="text-sm text-blue-700 hover:underline">Forgot Password?</Link>

@@ -36,7 +36,7 @@ export default function LoginPage() {
 
       <div className="flex flex-1 flex-col md:flex-row justify-between items-start px-4 md:px-9 pt-6 md:pt-8 gap-8">
         <div className="w-full md:max-w-md lg:w-[45rem] h-[30rem] border border-gray-400 rounded-lg px-6">
-          <h2 className="text-center text-xl font-semibold mb-8 text-gray-600 lg:mt-6">
+          <h2 className="text-center text-xl font-semibold mb-8 text-gray-600 lg:mt-6 pt-2">
             Agent Sign In
           </h2>
 
@@ -76,8 +76,8 @@ export default function LoginPage() {
             </div>
 
             <div className="flex items-center justify-between">
-              <label className="flex items-center text-sm">
-                <input type="checkbox" className="mr-2 text-gray-600 accent-[#6F0C15]" />
+              <label className="flex items-center text-sm text-gray-600">
+                <input type="checkbox" className="mr-2 accent-[#6F0C15]" />
                 Remember me?
               </label>
               <Link
