@@ -36,26 +36,26 @@ export default function LoginPage() {
 
       <div className="flex flex-1 flex-col md:flex-row justify-between items-start px-4 md:px-9 pt-6 md:pt-8 gap-8">
         <div className="w-full md:max-w-md lg:w-[45rem] h-[30rem] border border-gray-400 rounded-lg px-6">
-          <h2 className="text-center text-xl font-semibold mb-8 lg:mt-6">
+          <h2 className="text-center text-xl font-semibold mb-8 text-gray-600 lg:mt-6">
             Agent Sign In
           </h2>
 
           <form className="space-y-6">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium mb-1">
+              <label htmlFor="email" className="block text-sm text-gray-600 font-medium mb-1">
                 E-mail
               </label>
               <input
                 id="email"
                 type="email"
                 placeholder="Enter your email"
-                className="w-full border border-[#6F0C15] rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#6F0C15] text-sm"
+                className="w-full border border-[#6F0C15] placeholder-gray-600 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#6F0C15] text-sm"
                 required
               />
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium mb-1">
+              <label htmlFor="password" className="block text-sm text-gray-600 font-medium mb-1">
                 Password
               </label>
               <div className="relative">
@@ -63,7 +63,7 @@ export default function LoginPage() {
                   id="password"
                   type={showPassword ? "text" : "password"}
                   placeholder="Password"
-                  className="w-full border border-[#6F0C15] rounded-md px-3 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-[#6F0C15] text-sm"
+                  className="w-full border border-[#6F0C15] rounded-md placeholder-gray-600 px-3 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-[#6F0C15] text-sm"
                   required
                 />
                 <span
@@ -77,7 +77,7 @@ export default function LoginPage() {
 
             <div className="flex items-center justify-between">
               <label className="flex items-center text-sm">
-                <input type="checkbox" className="mr-2 accent-[#6F0C15]" />
+                <input type="checkbox" className="mr-2 text-gray-600 accent-[#6F0C15]" />
                 Remember me?
               </label>
               <Link
@@ -97,7 +97,7 @@ export default function LoginPage() {
           </form>
 
           <div className="flex flex-col sm:flex-row justify-between items-center mt-4 text-sm gap-2">
-            <span>
+            <span className="text-gray-600">
               Don&#39;t have an account?{" "}
               <Link
                 href="/signup"
