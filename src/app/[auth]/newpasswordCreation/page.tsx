@@ -83,15 +83,15 @@ export default function NewPassword() {
                             <Image src={icon} alt="Avetium Technologies" width={24} height={24} priority />
                         </div>
 
-                        <h2 className="text-xl font-bold mb-4 text-center">Create New Password</h2>
+                        <h2 className="text-xl font-bold mb-4 text-gray-600 text-center">Create New Password</h2>
 
                         {message && <p className="text-red-500 text-sm mb-3">{message}</p>}
 
-                        <label className="block text-sm font-semibold text-gray-700 mb-1">New Password</label>
+                        <label className="block text-sm font-semibold text-gray-600 mb-1">New Password</label>
                         <input
                             type="password"
                             placeholder="Enter new password"
-                            className="w-full mb-2 p-2 border rounded-xl border-[#6F0C15]"
+                            className="w-full mb-2 p-2 border rounded-xl placeholder-gray-600 border-[#6F0C15]"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />

@@ -71,7 +71,7 @@ const VerificationCode: React.FC = () => {
                             value={code[idx]}
                             onChange={(e) => handleChange(e.target.value, idx)}
                             onKeyDown={(e) => handleKeyDown(e, idx)}
-                            className="w-12 h-12 text-center text-2xl border border-[#6F0C15] rounded-2xl focus:outline-[#6F0C15]"
+                            className="w-12 h-12 text-center text-2xl border border-[#6F0C15] text-gray-600 rounded-2xl focus:outline-[#6F0C15]"
                         />
                     ))}
                 </div>

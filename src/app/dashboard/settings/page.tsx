@@ -52,12 +52,12 @@ const SettingsPage = () => {
     <DashboardLayout topbar={<ExportTopbar />}>
       <div className="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-4">
         <div className="flex items-center gap-2 lg:mt-8">
-          <h1 className="text-xl sm:text-2xl font-bold text-[34px] leading-[40px] mb-6">Settings</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-[34px] leading-[40px]  text-gray-600 mb-6">Settings</h1>
         </div>
         <div className="flex items-center gap-2 sm:gap-3 mt-2 lg:mt-0 lg:ml-auto text-sm sm:text-[15px] font-medium">
-          <h2>Hodu CC</h2>
+          <h2 className=" text-gray-600">Hodu CC</h2>
           <Image src="/icons/dot.png" alt="Dot" width={8} height={8} />
-          <p>Connected</p>
+          <p className=" text-gray-600">Connected</p>
         </div>
       </div>
 

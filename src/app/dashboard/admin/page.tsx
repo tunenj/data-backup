@@ -32,19 +32,19 @@ const AdminDashboardPage = () => {
             width={8}
             height={8}
           />
-          <p className="text-sm sm:text-[15px] font-medium">Active</p>
+          <p className="text-sm sm:text-[15px] text-gray-600 font-medium">Active</p>
         </div>
 
         {/* Right-side connection status */}
         <div className="flex items-center gap-2 sm:gap-3 mt-2 lg:mt-0 lg:ml-auto text-sm sm:text-[15px] font-medium">
-          <h2>Hodu CC</h2>
+          <h2 className=" text-gray-600">Hodu CC</h2>
           <Image
             src="/icons/dot.png"
             alt="Dot"
             width={8}
             height={8}
           />
-          <p>Connected</p>
+          <p className=" text-gray-600">Connected</p>
         </div>
       </div>
 

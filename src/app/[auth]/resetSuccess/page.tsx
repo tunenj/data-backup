@@ -18,8 +18,8 @@ export default function PasswordResetSuccess() {
                         height={48}
                         className="mb-4 rounded-full bg-green-100 mt-12 p-2"
                     />
-                    <h2 className="text-2xl font-normal mb-2 text-center">Password Reset</h2>
-                    <p className="font-[Poppins] font-normal text-[16px] leading-[30px] tracking-[-0.02em] text-center mb-6">
+                    <h2 className="text-2xl font-normal mb-2 text-gray-600 text-center">Password Reset</h2>
+                    <p className="font-[Poppins] font-normal text-[16px] leading-[30px] text-gray-600 tracking-[-0.02em] text-center mb-6">
                         Your Password has been successfully reset.<br />
                         Click Below to log in
                     </p>

@@ -109,14 +109,14 @@ export default function CallLogTable() {
                 <button className="font-normal text-[12px] flex items-center gap-2">
                   <Image src="/icons/play.png" alt="Play" width={16} height={16} />
                 </button>
-                <span className="text-gray-700">#{log.id}</span>
+                <span className="text-gray-600">#{log.id}</span>
               </td>
-              <td className="px-1 py-2">{log.callType}</td>
-              <td className="px-1 py-2">{log.phoneNumber}</td>
-              <td className="px-1 py-2">{log.agentName}</td>
-              <td className="px-1 py-2">{log.campaign}</td>
-              <td className="px-1 py-2">{log.startTime}</td>
-              <td className="px-1 py-2">{log.duration}</td>
+              <td className="px-1 py-2 text-gray-600">{log.callType}</td>
+              <td className="px-1 py-2 text-gray-600">{log.phoneNumber}</td>
+              <td className="px-1 py-2 text-gray-600">{log.agentName}</td>
+              <td className="px-1 py-2 text-gray-600">{log.campaign}</td>
+              <td className="px-1 py-2 text-gray-600">{log.startTime}</td>
+              <td className="px-1 py-2 text-gray-600">{log.duration}</td>
               <td className="px-1 py-2 text-[#6F0C15]">{log.hungUpBy}</td>
               <td className="px-1 py-2">
                 <button>

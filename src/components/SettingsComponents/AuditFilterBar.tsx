@@ -23,7 +23,7 @@ const AuditFilterBar: React.FC = () => {
     <div className="bg-white shadow rounded-lg p-4 space-y-4">
       {/* Header row */}
       <div className="flex justify-between items-center">
-        <h2 className="font-semibold text-[20px] lg:text-[24px]">Audit Trail & Activity Monitor</h2>
+        <h2 className="font-semibold text-[20px] text-gray-600 lg:text-[24px]">Audit Trail & Activity Monitor</h2>
         <button className="flex items-center gap-2 bg-[#6F0C15] text-white px-4 py-2 rounded-md text-sm">
           <Download className="w-4 h-4" />
           Download CSV
@@ -34,7 +34,7 @@ const AuditFilterBar: React.FC = () => {
       <div className="flex flex-wrap gap-4 items-end">
         {/* Date Range */}
         <div className="flex flex-col">
-          <label className="text-sm font-medium mb-1">Date Range</label>
+          <label className="text-sm font-medium  text-gray-600 mb-1">Date Range</label>
           <select
             className="bg-[#F9EDED] text-sm px-10 py-3 rounded-md outline-none"
             value={filters.dateRange}
@@ -48,7 +48,7 @@ const AuditFilterBar: React.FC = () => {
 
         {/* User */}
         <div className="flex flex-col">
-          <label className="text-sm font-medium mb-1">User</label>
+          <label className="text-sm font-medium  text-gray-600 mb-1">User</label>
           <select
             className="bg-[#F9EDED] text-sm px-6 py-3 rounded-md outline-none"
             value={filters.user}
@@ -61,7 +61,7 @@ const AuditFilterBar: React.FC = () => {
 
         {/* Action Type */}
         <div className="flex flex-col">
-          <label className="text-sm font-medium mb-1">Action Type</label>
+          <label className="text-sm font-medium  text-gray-600 mb-1">Action Type</label>
           <select
             className="bg-[#F9EDED] text-sm px-6 py-3 rounded-md outline-none"
             value={filters.actionType}
@@ -75,7 +75,7 @@ const AuditFilterBar: React.FC = () => {
 
         {/* Result */}
         <div className="flex flex-col">
-          <label className="text-sm font-medium mb-1">Result</label>
+          <label className="text-sm font-medium  text-gray-600 mb-1">Result</label>
           <select
             className="bg-[#F9EDED] text-sm px-6 py-3 rounded-md outline-none"
             value={filters.result}

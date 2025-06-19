@@ -49,7 +49,7 @@ export default function LoginPage() {
                 id="email"
                 type="email"
                 placeholder="Enter your email"
-                className="w-full border border-[#6F0C15] placeholder-gray-600 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#6F0C15] text-sm"
+                className="w-full border border-[#6F0C15] placeholder-gray-600 text-gray-600 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#6F0C15] text-sm"
                 required
               />
             </div>
@@ -63,7 +63,7 @@ export default function LoginPage() {
                   id="password"
                   type={showPassword ? "text" : "password"}
                   placeholder="Password"
-                  className="w-full border border-[#6F0C15] rounded-md placeholder-gray-600 px-3 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-[#6F0C15] text-sm"
+                  className="w-full border border-[#6F0C15] rounded-md placeholder-gray-600 text-gray-600 px-3 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-[#6F0C15] text-sm"
                   required
                 />
                 <span

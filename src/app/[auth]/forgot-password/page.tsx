@@ -48,7 +48,7 @@ export default function ForgotPassword() {
           <div className="w-12 h-12 bg-gray-400 flex items-center justify-center rounded-full">
             <Image src="/icons/icon.png" alt="icon" width={24} height={24} />
           </div>
-          <h2 className="text-2xl font-semibold mt-4">Forgot Password</h2>
+          <h2 className="text-2xl font-semibold text-gray-600 mt-4">Forgot Password</h2>
           <p className="text-gray-600 text-sm mt-1">
             No worries, we&apos;ll send you reset instructions.
           </p>
@@ -71,7 +71,7 @@ export default function ForgotPassword() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
-                className="w-full border border-[#6F0C15] py-2 px-3 rounded-md lg:mb-4"
+                className="w-full border border-[#6F0C15] placeholder-gray-600 text-gray-600  py-2 px-3 rounded-md lg:mb-4"
                 required
               />
               <button
