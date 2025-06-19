@@ -123,7 +123,7 @@ export default function SignupPage() {
                 onChange={handleChange}
                 required
                 placeholder="First Name"
-                className="w-1/2 border border-[#6F0C15] p-2 placeholder-gray-60 rounded"
+                className="w-1/2 border border-[#6F0C15] p-2 placeholder-gray-600 rounded"
               />
               <input
                 name="lastName"
@@ -131,7 +131,7 @@ export default function SignupPage() {
                 onChange={handleChange}
                 required
                 placeholder="Last Name"
-                className="w-1/2 border border-[#6F0C15] placeholder-gray-60 p-2 rounded"
+                className="w-1/2 border border-[#6F0C15] placeholder-gray-600 p-2 rounded"
               />
             </div>
 
@@ -142,7 +142,7 @@ export default function SignupPage() {
               onChange={handleChange}
               required
               placeholder="Business Email"
-              className="w-full border border-[#6F0C15] placeholder-gray-60 p-2 rounded"
+              className="w-full border border-[#6F0C15] placeholder-gray-600 p-2 rounded"
             />
             <input
               name="phone"
@@ -151,7 +151,7 @@ export default function SignupPage() {
               onChange={handleChange}
               required
               placeholder="Phone Number"
-              className="w-full border border-[#6F0C15] placeholder-gray-60 p-2 rounded"
+              className="w-full border border-[#6F0C15] placeholder-gray-600 p-2 rounded"
             />
 
             <div className="relative">

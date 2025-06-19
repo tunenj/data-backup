@@ -84,7 +84,7 @@ export default function AdminLogin() {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="Enter your email"
-                className="w-full border border-[#6F0C15] rounded-md px-3 placeholder-gray-60 py-2 focus:outline-none focus:ring-2 focus:ring-[#6F0C15] text-sm"
+                className="w-full border border-[#6F0C15] rounded-md px-3 placeholder-gray-600 py-2 focus:outline-none focus:ring-2 focus:ring-[#6F0C15] text-sm"
                 required
               />
             </div>
@@ -97,7 +97,7 @@ export default function AdminLogin() {
                 value={formData.password}
                 onChange={handleChange}
                 placeholder="Password"
-                className="w-full border border-[#6F0C15] rounded-md px-3 placeholder-gray-60 py-2 focus:outline-none focus:ring-2 focus:ring-[#6F0C15] text-sm pr-10"
+                className="w-full border border-[#6F0C15] rounded-md px-3 placeholder-gray-600 py-2 focus:outline-none focus:ring-2 focus:ring-[#6F0C15] text-sm pr-10"
                 required
               />
               <span
