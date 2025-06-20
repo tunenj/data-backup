@@ -1,32 +1,31 @@
 'use client';
 
+import { useState } from 'react';
 import Image from 'next/image';
 import { Search, ChevronDown, Menu } from 'lucide-react';
-import { useState } from 'react';
 import Link from 'next/link';
-import { X } from 'lucide-react'
 import ProfileMenu from '../ProfileMenu/ProfileMenu';
+import AdvancedSearch from '../AdvancedSearch/AdvancedSearch';
 
 const Topbar = () => {
   const [showMobileSearch, setShowMobileSearch] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const closeModal = () => setIsModalOpen(false);
+  const [isAdvancedSearchOpen, setIsAdvancedSearchOpen] = useState(false);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
 
-  interface TagProps {
-    label: string;
-    onRemove?: () => void;
-  }
+  const closeModals = () => {
+    setIsAdvancedSearchOpen(false);
+    setIsProfileMenuOpen(false);
+  };
 
-  const Tag: React.FC<TagProps> = ({ label, onRemove }) => {
-    return (
-      <div className="flex items-center justify-between px-4 py-1 rounded-[15px] bg-[#C09A9E] text-white text-sm w-[140px] h-[40px]">
-        <span className="">{label}</span>
-        <button onClick={onRemove} className="ml-2 hover:text-gray-200">
-          <X size={14} />
-        </button>
-      </div>
-    );
+  const handleSearchClick = () => {
+    setIsAdvancedSearchOpen(true); // Open Advanced Search Modal
+    setIsProfileMenuOpen(false); // Ensure Profile Menu is closed
+  };
+
+  const handleProfileMenuClick = () => {
+    setIsProfileMenuOpen(true);
+    setIsAdvancedSearchOpen(false); // Ensure Advanced Search is closed
   };
 
   return (
@@ -49,8 +48,12 @@ const Topbar = () => {
             type="text"
             placeholder="Search by Call ID, Agent, Phone #, Campaign..."
             className="pl-10 pr-4 py-2 w-full h-10 border border-[#d4a2aa] rounded-full text-sm outline-none bg-white text-[#6F0C15]"
+            onClick={handleSearchClick} // Open modal when clicked
+            onChange={() => setIsAdvancedSearchOpen(true)} // Open modal when typing
           />
-          <Search className="absolute left-3 top-2.5 h-5 w-5 text-[#6F0C15]" />
+          <Search
+            className="absolute left-3 top-2.5 h-5 w-5 text-[#6F0C15]"
+          />
         </div>
       </div>
 
@@ -72,26 +75,31 @@ const Topbar = () => {
         </button>
 
         {/* Notifications and User */}
-        <button className="flex items-center gap-1 ml-4">
-          <Image src="/icons/bell.png" alt="Notifications" width={16} height={16} />
-          <span className="text-sm text-[#1C1C1C]">Notifications</span>
+      </div>
+      <div className="flex items-center gap-4 relative cursor-pointer" onClick={handleProfileMenuClick}>
+        <button className="p-2 flex items-center ml-10" aria-label="Notifications">
+          <Image
+            src="/icons/bell.png"
+            alt="Notifications"
+            width={16}
+            height={16}
+            className="w-4 h-4"
+          />
+          <span className="hidden md:inline ml-1 text-sm text-[#6F0C15]">Notifications</span>
         </button>
-        <div
-          className="flex items-center gap-1 relative cursor-pointer"
-          onClick={() => setIsModalOpen(true)}
+        <div className="flex items-center gap-1 cursor-pointer pl-1"
         >
           <Image
             src="/icons/Ellipse.png"
             alt="User"
-            width={32}
-            height={32}
-            className="rounded-full"
+            width={28}
+            height={28}
+            className="rounded-full w-7 h-7"
           />
-          <span className="text-sm text-black">Jane F.</span>
-          <ChevronDown className="text-black h-4 w-4" />
+          <span className="hidden lg:inline text-sm text-black">Jane F.</span>
+          <ChevronDown className="hidden lg:inline text-black h-4 w-4" />
         </div>
       </div>
-
       {/* Mobile Buttons */}
       <div className="flex lg:hidden items-center gap-3 ml-auto">
         <button onClick={() => setShowMobileSearch(!showMobileSearch)}>
@@ -135,20 +143,27 @@ const Topbar = () => {
         </div>
       )}
 
-      {isModalOpen && (
-        <div className="absolute right-0 top-[100%] max-w-md rounded-2xl border border-[#d4a2aa] mx-6">
+      {/* Advanced Search Modal */}
+      {isAdvancedSearchOpen && (
+        <div className="absolute top-[100%] max-w-md rounded-xl shadow-xl mx-60 z-20">
+          <div className="relative">
+            <AdvancedSearch />
+          </div>
+        </div>
+      )}
+
+      {/* Profile Menu Modal */}
+      {isProfileMenuOpen && (
+        <div className="absolute right-0 top-[100%] max-w-md shadow-2xl rounded-xl  mx-6 z-20">
           <div className="border-b border-white relative">
             <ProfileMenu />
-            <button
-              onClick={closeModal}
-              className="text-[#6F0C15] text-lg absolute top-0 right-0 px-5 pt-2"
-            >
+            <button onClick={closeModals} className="text-[#6F0C15] text-lg absolute top-0 right-0 px-5 pt-2">
               x
             </button>
           </div>
         </div>
       )}
-    </header >
+    </header>
   );
 };
 

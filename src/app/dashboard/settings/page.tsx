@@ -133,7 +133,7 @@ const SettingsPage = () => {
         <>
           {/* Modal Backdrop */}
           {isModalOpen && (
-            <div className="absolute right-0 top-[10%] max-w-md rounded-2xl border border-[#d4a2aa] mx-4">
+            <div className="absolute right-0 top-[10%] max-w-md rounded-2xl shadow-xl mx-4">
               <div className="border-b border-white relative">
                 <ProfileMenu />
                 <button

@@ -176,7 +176,7 @@ export default function CallLogTable() {
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="absolute right-0 top-[15%] w-[392]  max-w-md bg-[#EFE4E5] rounded-lg border border-[#d4a2aa] z-50">
+        <div className="absolute right-0 top-[11%] w-[392]  max-w-md bg-[#EFE4E5] rounded-lg border border-[#d4a2aa] z-50">
           <div className="bg-[#EFE4E5] rounded-lg border border-[#d4a2aa] w-full max-h-[80vh] overflow-y-auto">
             {/* Header */}
             <div className="border-b border-[#d4a2aa] px-2 flex justify-end items-center">
@@ -260,7 +260,7 @@ export default function CallLogTable() {
 
             <div className='p-4'>
               <div className='bg-[#EFE4E5] shadow-xl rounded-xl p-3'>
-                <div className="flex items-center justify-between w-full">
+                <div className="flex items-center justify-between w-full pb-3">
                   <p className='text-gray-400'>Call Recording 2025-10-5</p>
                   <Image src="/icons/modalIcons/flag-outline.png" alt="" width={12} height={14} />
                 </div>

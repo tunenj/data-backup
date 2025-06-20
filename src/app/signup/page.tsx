@@ -109,7 +109,7 @@ export default function SignupPage() {
   };
 
   return (
-    <>
+    <div className="bg-white">
       <BackSign />
       <div className="bg-white min-h-screen flex flex-col px-1">
         <div className="min-h-screen flex flex-col px-8 py-6 max-w-2xl mx-auto">
@@ -263,6 +263,6 @@ export default function SignupPage() {
 
         </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -13,7 +13,7 @@ const menuItems = [
 
 export default function ProfileMenu() {
     return (
-        <div className="w-52 rounded-2xl overflow-hidden shadow bg-white font-sans">
+        <div className="w-48 rounded-2xl overflow-hidden shadow bg-white font-sans">
             {/* Profile Header */}
             <div className="flex items-center gap-2 px-4 py-3 border-b">
                 <Image src="/icons/prof.png" alt="Profile Icon" width={16} height={16} />
