@@ -134,14 +134,14 @@ const UserTable: React.FC<Props> = ({ users }) => {
                 <div className="flex gap-4 mb-4">
                   <button
                     type="button"
-                    className={`px-12 py-2 rounded-full ${role === 'Agent' ? 'bg-[#6F0C15] text-white' : 'bg-gray-400'}`}
+                    className={`px-12 py-2 rounded-2xl ${role === 'Agent' ? 'bg-[#6F0C15] text-white' : 'bg-gray-400'}`}
                     onClick={() => setRole('Agent')}
                   >
                     Agent
                   </button>
                   <button
                     type="button"
-                    className={`px-12 py-2 rounded-full ${role === 'Supervisor' ? 'bg-[#6F0C15] text-white' : 'bg-gray-400'}`}
+                    className={`px-8 py-2 rounded-2xl ${role === 'Supervisor' ? 'bg-[#6F0C15] text-white' : 'bg-gray-400'}`}
                     onClick={() => setRole('Supervisor')}
                   >
                     Supervisor
@@ -204,14 +204,14 @@ const UserTable: React.FC<Props> = ({ users }) => {
                 <div className="flex justify-between gap-4 mt-6">
                   <button
                     type="button"
-                    className="px-4 py-2 rounded-md border border-[#6F0C15] text-[#6F0C15] w-full"
+                    className="px-4 py-2 rounded-2xl border border-[#6F0C15] text-[#6F0C15] w-full"
                     onClick={closeModal}  // Close modal on Cancel
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="px-4 py-2 rounded-md bg-[#6F0C15] text-white w-full"
+                    className="px-4 py-2 rounded-2xl bg-[#6F0C15] text-white w-full"
                   >
                     Add New User
                   </button>

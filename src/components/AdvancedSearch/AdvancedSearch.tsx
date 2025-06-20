@@ -58,7 +58,7 @@ export default function AdvancedSearch() {
         <>
             {/* Modal structure */}
             {isModalOpen && (
-                <div className="relative flex justify-center items-center z-50">
+                <div className="relative flex justify-center items-center z-50 rounded-2xl">
                     <div className="bg-[#EFE4E5] p-6  max-w-3xl w-full relative">
                         <h2 className="text-[#6F0C15] text-2xl font-bold mb-6">Advanced Search</h2>
 
