@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -34,9 +34,13 @@ export default function AdminLogin() {
       if (response.ok) {
         const { access, refresh, token } = result;
 
-        if (access) localStorage.setItem("accessToken", access);
-        if (refresh) localStorage.setItem("refreshToken", refresh);
-        if (token) localStorage.setItem("sessionToken", token);
+        // Store tokens in cookies
+        if (access)
+          document.cookie = `accessToken=${access}; path=/; max-age=3600; Secure; SameSite=Lax`;
+        if (refresh)
+          document.cookie = `refreshToken=${refresh}; path=/; max-age=86400; Secure; SameSite=Lax`;
+        if (token)
+          document.cookie = `sessionToken=${token}; path=/; max-age=3600; Secure; SameSite=Lax`;
 
         setTimeout(() => {
           router.push("/dashboard/admin");
@@ -70,9 +74,9 @@ export default function AdminLogin() {
       </div>
 
       {/* Main Content */}
-      <div className="flex flex-col md:flex-row flex-1 justify-between items-start px-4 md:px-9 pt-6 md:pt-8 gap-8">
+      <div className="flex flex-col md:flex-row flex-1 justify-between items-start px-4 md:px-9 pt-6 md:pt-4 gap-8">
         {/* Login Form */}
-        <div className="w-full md:max-w-md lg:w-[45rem] h-[30rem] border border-gray-400 rounded-lg px-6">
+        <div className="w-full md:max-w-md lg:w-[42rem] h-[30rem] border border-gray-400 rounded-lg px-6">
           <h2 className="text-center text-xl font-semibold mb-8 text-gray-600 lg:mt-6 pt-2">Admin Sign In</h2>
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
@@ -110,7 +114,7 @@ export default function AdminLogin() {
 
             <div className="flex items-center justify-between">
               <label className="flex items-center text-sm text-gray-600">
-                <input type="checkbox" className="mr-2  accent-[#6F0C15]" />
+                <input type="checkbox" className="mr-2 accent-[#6F0C15]" />
                 Remember me?
               </label>
               <Link href="/auth/forgot-password" className="text-sm text-blue-700 hover:underline">Forgot Password?</Link>
@@ -136,8 +140,8 @@ export default function AdminLogin() {
 
         {/* Info Card */}
         <div className="w-full md:max-w-xl">
-          <div className="rounded-lg border border-[#6F0C15] overflow-hidden bg-white shadow-sm p-2">
-            <div className="h-48 md:h-[20rem] w-full relative">
+          <div className="rounded-lg border border-[#6F0C15] overflow-y-hidden bg-white shadow-sm p-2">
+            <div className="h-48 md:h-[19rem] w-full relative">
               <Image src="/images/Info.png" alt="info" fill style={{ objectFit: "cover" }} />
             </div>
             <div className="p-5">

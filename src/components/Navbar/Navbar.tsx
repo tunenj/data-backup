@@ -1,4 +1,5 @@
 'use client';
+
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -13,22 +14,28 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [signInOpen, setSignInOpen] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
 
-  // Close SignIn dropdown on outside click
   useEffect(() => {
-    const handler = (e: Event) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(e.target as Node)
-      ) {
-        setSignInOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handler);
     return () => {
-      document.removeEventListener('mousedown', handler);
+      // Cleanup on unmount if timeout exists
+      if (timeoutId) clearTimeout(timeoutId);
     };
-  }, []);
+  }, [timeoutId]);
+
+  const handleMouseEnter = () => {
+    // If the user hovers over the dropdown, clear the timeout
+    if (timeoutId) clearTimeout(timeoutId);
+    setSignInOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    // Set timeout to close the dropdown after 1 minute (60000ms)
+    const id = setTimeout(() => {
+      setSignInOpen(false);
+    }, 60000); // Close after 1 minute
+    setTimeoutId(id); // Save timeoutId to clear it if necessary
+  };
 
   return (
     <nav
@@ -81,8 +88,8 @@ export default function Navbar() {
           <div
             className="relative"
             ref={dropdownRef}
-            onMouseEnter={() => setSignInOpen(true)}
-            onMouseLeave={() => setSignInOpen(false)}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           >
             <button
               onClick={() => setSignInOpen(prev => !prev)}
@@ -93,7 +100,7 @@ export default function Navbar() {
             </button>
 
             {signInOpen && (
-              <div className="absolute right-0 mt-2 w-[12rem] bg-white border-1 px-2 border-[#6F0C15] rounded-lg shadow-lg z-50">
+              <div className="absolute right-0 mt-2 w-[10rem] bg-white border px-2 border-[#6F0C15] rounded-lg shadow-lg z-50">
                 <Link href="/login/AdminLogin" onClick={() => setSignInOpen(false)}>
                   <div className="px-4 py-2 text-[#6F0C15] cursor-pointer hover:bg-[#6F0C15] hover:text-white hover:border-2 hover:rounded-lg hover:mt-2">
                     Admin Sign in

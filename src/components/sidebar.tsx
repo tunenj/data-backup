@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import Image from "next/image";
+import Cookies from "js-cookie";
 
 type SidebarProps = {
   role: 'admin' | 'agent';
@@ -18,17 +19,22 @@ const Sidebar: React.FC<SidebarProps> = ({ role }) => {
     { name: "Dashboard", icon: "/icons/dashboard.png" },
     { name: "Archived Calls", path: "/dashboard/archived_calls", icon: "/icons/archive.png" },
     { name: "Export Logs", path: "/dashboard/Export_Logs", icon: "/icons/export.png" },
-    { name: "Alerts", path: "/dashboard/admin/Alerts", icon: "/icons/alert.png" },
+    { name: "Alerts", path: "/dashboard/alerts", icon: "/icons/alert.png" },
     { name: "Settings", path: "/dashboard/settings", icon: "/icons/settings.png" },
   ];
 
   const handleDashboardClick = () => {
+    // If already on the Dashboard page, do nothing
+    if (path.includes("/dashboard/admin") || path.includes("/dashboard/agent")) {
+      return;
+    }
+
     const response = window.prompt("Go to 'Admin' or 'Agent' dashboard?");
     if (response?.toLowerCase() === "admin") {
-      localStorage.setItem("role", "admin");
+      Cookies.set("role", "admin");
       router.push("/dashboard/admin");
     } else if (response?.toLowerCase() === "agent") {
-      localStorage.setItem("role", "agent");
+      Cookies.set("role", "agent");
       router.push("/dashboard/agent");
     } else {
       alert("Invalid choice. Please type 'admin' or 'agent'.");
@@ -36,24 +42,42 @@ const Sidebar: React.FC<SidebarProps> = ({ role }) => {
   };
 
   const handleLogout = async () => {
-    const token = localStorage.getItem("token");
+    const accessToken = Cookies.get("accessToken");
+    const refreshToken = Cookies.get("refreshToken");
+
+    if (!accessToken || !refreshToken) {
+      console.warn("Missing token(s). Redirecting to login.");
+      router.push("/login/AdminLogin");
+      return;
+    }
+
     try {
+      console.log("Logging out with refresh token:", refreshToken);
+
       const response = await fetch("https://avetiumbackupservice.avetiumconsult.com/api/auth/logout/", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
         },
+        body: JSON.stringify({ refresh: refreshToken })
       });
 
+      const text = await response.text();
+      console.log("Logout response:", text);
+
       if (response.ok) {
-        localStorage.removeItem("token");
-        window.location.href = "/login";
+        Cookies.remove("accessToken");
+        Cookies.remove("refreshToken");
+        Cookies.remove("sessionToken");
+        Cookies.remove("role");
+
+        router.push("/login/AdminLogin");
       } else {
-        const errorData = await response.json();
-        alert(errorData.message || "Logout failed.");
+        alert("Logout failed.");
       }
-    } catch {
+    } catch (error) {
+      console.error("Logout error:", error);
       alert("Network error during logout.");
     }
   };
