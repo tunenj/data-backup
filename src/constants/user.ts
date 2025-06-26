@@ -1,5 +1,4 @@
-// constants/user.ts
-
+// This import to settings page
 export interface User {
   id: number;
   name: string;

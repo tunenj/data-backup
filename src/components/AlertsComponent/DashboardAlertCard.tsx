@@ -1,25 +1,27 @@
 // DashboardAlertCard.tsx
-import React from "react";
+import React from 'react';
 
-type AlertCardProps = {
+interface AlertCardProps {
     title: string;
     count: number;
     icon: React.ReactNode;
     bgColor: string;
-};
+    countStyle?: string;
+    subTitle?: string;
+}
 
-const AlertCard: React.FC<AlertCardProps> = ({ title, count, icon, bgColor }) => {
+const AlertCard: React.FC<AlertCardProps> = ({ title, count, icon, bgColor, countStyle, subTitle }) => {
     return (
-        <div className={`p-6 rounded-lg ${bgColor} text-white`}>
-            <div className="flex items-center space-x-3">
-                <div className="text-2xl">{icon}</div>
-                <div>
-                    <h3 className="text-lg">{title}</h3>
-                    <p className="text-xl font-semibold">{count}</p>
-                </div>
+        <div className={`p-4 ${bgColor} rounded shadow-lg lg:mt-6`}>
+
+            <h3 className="text-xl font-medium text-gray-400">{title}</h3>
+            <div className='flex items-center space-x-20'>
+                <div className={`text-center ${countStyle}`}>{count} </div>
+                <div>{icon}</div>
             </div>
-            <p className="text-sm mt-2">Since last week</p>
+            <h4 className="text-md text-dark-red-brown mt-1">{subTitle}</h4>
         </div>
+
     );
 };
 

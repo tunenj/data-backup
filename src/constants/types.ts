@@ -1,3 +1,4 @@
+// This is speak to Export-logs page
 export type ExportStatus = 'Completed' | 'In Progress' | 'Failed';
 
 export interface ExportRecord {

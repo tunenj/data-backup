@@ -33,7 +33,7 @@ export const ExportRecordsTable = () => {
   return (
     <div className="overflow-x-auto border border-gray-200 rounded-lg mt-6">
       <table className="min-w-full divide-y divide-gray-200 text-sm">
-        <thead className="bg-[#EFE4E5] text-left text-gray-700 font-medium">
+        <thead className="bg-[#EFE4E5] text-left lg:text-lg text-gray-700 font-medium">
           <tr>
             <th className="px-2 sm:px-4 py-3">
               <input type="checkbox" />

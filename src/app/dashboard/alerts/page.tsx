@@ -4,14 +4,14 @@ import { useState } from "react";
 import DashboardLayout from "@/app/dashboard/Export_Logs/layouts/DashboardLayout";
 import CallLogTable from "@/components/CallLogTable/CallLogTable";
 import Image from "next/image";
-import { Search, X } from "lucide-react";
-import Pagination from "@/components/Pagination/Pagination";
+import { X } from "lucide-react";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
-import DateRangeSelector from "@/components/DateRangeAdmin/DateRangeSelector";
 import ProfileMenu from "@/components/ProfileMenu/ProfileMenu";
-import AlertCard from "@/components/AlertsComponent/DashboardAlertCard";
 import AlertsPage from "@/components/AlertsComponent/AlertsPage";
+import FilterAlerts from "@/components/AlertsComponent/FilterAlerts";
+import Pagination from "@/components/Pagination/Pagination";
+import SystemAlertsTable from "@/components/AlertsComponent/SystemAlertsTable";
 
 const ExportTopbar = ({ setIsModalOpen }: { setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>> }) => (
     <header className="w-full min-h-[4rem] md:h-16 flex flex-wrap items-center justify-between bg-[#EFE4E5] px-4 md:px-6 py-2 shadow relative">
@@ -75,7 +75,7 @@ const AlertPage = () => {
 
     return (
         <DashboardLayout topbar={<ExportTopbar setIsModalOpen={setIsModalOpen} />}>
-            <div className="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-4">
+            <div className="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-4 bg-white">
                 <div className="items-center gap-2 mb-8 mt-4">
                     <h1 className="text-xl sm:text-2xl font-bold text-[#6F0C15]">Alerts</h1>
                     <p className="text-[#2E19149E]">Monitor system notifications and issues</p>
@@ -87,9 +87,9 @@ const AlertPage = () => {
                 </div>
             </div>
             <AlertsPage />
-
-
-
+            <FilterAlerts />
+            <SystemAlertsTable />
+            <Pagination totalItems={totalExports} itemsPerPage={itemsPerPage} />
             {isModalOpen && (
                 <>
                     {/* Modal Backdrop */}
